@@ -420,7 +420,7 @@ document.addEventListener("DOMContentLoaded", function () {
       } else {
         $figureHighlight.forEach(function (item) {
           let langName = item.getAttribute("class").split(" ")[1];
-          if (langName === "plain" || langName === undefined) langName = "Code";
+          if (langName === "plain" || langName === undefined || langName === "plaintext") langName = "Code";
           const highlightLangEle = `<div class="code-lang">${langName}</div>`;
           createEle(highlightLangEle, item, "hl");
         });
