@@ -2428,6 +2428,7 @@ svg.huifont.tab {
 }
 #page p a:hover {
   text-decoration: none;
+  color: #fff;
 }
 h1 {
   font-size: 2em;
@@ -6374,6 +6375,12 @@ div#equipment {
   left: 0;
   width: 100%;
   padding: 0 16px;
+}
+.author-content.author-content-item.essayPage {
+  height: 19rem;
+  color: var(--sco-white);
+  overflow: hidden;
+  margin-top: 0;
 }
 #error-wrap {
   display: flex;
