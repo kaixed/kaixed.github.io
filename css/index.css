@@ -12312,6 +12312,211 @@ a.reward-main-btn:hover {
   white-space: nowrap;
   font-weight: 700;
 }
+#rightMenu {
+  display: none;
+  position: fixed;
+  padding: 0 0.25rem;
+  width: 9rem;
+  height: fit-content;
+  top: 10%;
+  left: 10%;
+  background-color: var(--sco-maskbgdeep);
+  -webkit-backdrop-filter: blur(20px);
+  backdrop-filter: blur(20px);
+  transform: translateZ(0);
+  color: var(--sco-fontcolor);
+  border-radius: 12px;
+  z-index: 99994;
+  border: var(--style-border);
+  user-select: none;
+  box-shadow: var(--sco-shadow-black);
+  transition: border 0.3s;
+}
+#rightMenu:hover {
+  border: var(--style-border-hover);
+  box-shadow: var(--sco-shadow-theme);
+}
+#rightMenu .rightMenu-group {
+  padding: 0.35rem 0.3rem;
+  transition: 0.3s;
+}
+#rightMenu .rightMenu-line {
+  border-top: 1px dashed var(--sco-theme-op);
+}
+#rightMenu .rightMenu-group.rightMenu-small {
+  display: flex;
+  justify-content: space-between;
+}
+#rightMenu .rightMenu-group .rightMenu-item {
+  border-radius: 8px;
+  transition: 0.3s;
+  cursor: pointer;
+}
+#rightMenu .rightMenu-line .rightMenu-item {
+  margin: 0.25rem 0;
+  padding: 0.25rem 0;
+}
+#rightMenu .rightMenu-group.rightMenu-line .rightMenu-item {
+  display: flex;
+}
+#rightMenu .rightMenu-group .rightMenu-item:hover {
+  background-color: var(--sco-main);
+  color: var(--sco-white);
+  box-shadow: var(--sco-shadow-main);
+}
+#rightMenu .rightMenu-group .rightMenu-item i {
+  display: inline-block;
+  text-align: center;
+  line-height: 1.5rem;
+  width: 1.5rem;
+  padding: 0 0.25rem;
+}
+#rightMenu .rightMenu-line .rightMenu-item i {
+  margin: 0 0.25rem;
+}
+#rightMenu .rightMenu-group .rightMenu-item span {
+  line-height: 1.5rem;
+}
+.rightMenu-small .rightMenu-item {
+  width: 30px;
+  height: 30px;
+  line-height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+#rightmenu-mask {
+  position: fixed;
+  width: 100vw;
+  height: 100vh;
+  background: 0 0;
+  top: 0;
+  left: 0;
+  display: none;
+  margin: 0 !important;
+  z-index: 99993;
+}
+.search-dialog {
+  position: fixed;
+  top: 5rem;
+  left: 50%;
+  z-index: 1001;
+  display: none;
+  margin-left: -15rem;
+  padding: 1rem;
+  width: 30rem;
+  box-shadow: var(--sco-shadow-lightblack);
+  background: var(--sco-card-bg);
+  border: var(--style-border);
+  transition: 0.3s;
+  border-radius: 12px;
+}
+@media screen and (max-width: 768px) {
+  .search-dialog {
+    top: 0px;
+    left: 0px;
+    margin: 0px;
+    width: 100%;
+    height: 100%;
+  }
+}
+.search-dialog .search-close-button:hover {
+  color: #307af6;
+}
+.search-dialog .search-box {
+  padding-top: 8px;
+  max-width: 100%;
+}
+.search-dialog .search-box input {
+  height: 100%;
+  width: 100%;
+  padding: 0.25rem 0.7rem;
+  outline: 0px;
+  border: var(--style-border);
+  border-radius: 8px;
+  background: var(--sco-secondbg);
+  color: var(--sco-fontcolor);
+}
+.search-dialog .search-box input:focus {
+  border: var(--style-border-hover);
+}
+.search-dialog .search-close-button {
+  color: #858585;
+  font-size: 1.2em;
+  line-height: 1;
+  cursor: pointer;
+  transition: color 0.2s ease-in-out 0s;
+}
+#search-mask {
+  position: fixed;
+  inset: 0px;
+  z-index: 1000;
+  display: none;
+  background: rgba(0,0,0,0.6);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  transform: translateZ(0);
+  background: var(--sco-maskbgdeep);
+}
+.search-nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 0.2rem 0.7rem 0.2rem;
+}
+.search-dialog-title {
+  font-weight: bold;
+  color: var(--sco-main);
+  font-size: 1.4em;
+  line-height: 1;
+}
+.search-box input::placeholder {
+  color: var(--sco-gray);
+}
+#algolia-search #search-results {
+  padding: 8px;
+  max-height: calc(80vh - 130px);
+  overflow-y: auto;
+}
+@media screen and (max-width: 768px) {
+  #algolia-search #search-results {
+    max-height: 80vh !important;
+  }
+}
+#algolia-search .ais-Hits-list {
+  padding: 0;
+}
+#algolia-search .ais-Hits-item {
+  margin: 10px 0;
+}
+#algolia-search .algolia-hit-item-content {
+  margin: 0;
+  padding-left: 10px;
+  font-size: 14px;
+  color: var(--sco-gray);
+}
+#algolia-search .algolia-hit-item-link {
+  width: auto;
+  max-width: 100%;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  font-weight: bold;
+}
+#algolia-search mark {
+  color: var(--sco-theme);
+  font-style: normal;
+  background: var(--sco-card-bg);
+}
+#algolia-search .ais-Hits--empty {
+  text-align: center;
+  font-weight: 600;
+}
+#algolia-search .algolia-stats {
+  color: var(--sco-gray);
+  font-size: 0.8rem;
+  font-weight: bold;
+}
 [data-theme=dark] {
   --sco-theme: #f2b94b;
   --sco-theme-op: rgba(242,185,75,0.137);
