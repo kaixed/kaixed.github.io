@@ -52,7 +52,7 @@
 console.log("%c🔥 程序：Hexo | 主题：Hexo-Theme-Solitude | 作者：DuoSco团队 | 官网：https://github.com/DuoSco/Hexo-theme-solitude 😋", "color:#fff; background: linear-gradient(270deg, #18d7d3, #68b7dd, #8695e6, #986fee); padding: 8px 15px; border-radius: 8px");
 </script><div><script src="/js/utils.js"></script><script src="/js/main.js"></script></div><!-- global head--><script>const GLOBAL_CONFIG = {
     root: '/',
-    algolia: {"appId":"0QDQ6018HA","apiKey":"36e8a13e13406bf41971c59c2bbb0aa3","indexName":"myBlog"},
+    algolia: {"appId":"0QDQ6018HA","apiKey":"36e8a13e13406bf41971c59c2bbb0aa3","indexName":"myBlog","hits":{"per_page":6}},
     localsearch: undefined,
     runtime: '2023-11-25 00:00:00',
     lazyload: {
@@ -90,8 +90,8 @@ console.log("%c🔥 程序：Hexo | 主题：Hexo-Theme-Solitude | 作者：DuoS
             goodnight: '睡个好觉，保证精力充沛',
         },
         search: {
-            empty: '搜索结果为空',
-            hit: '已为您找到 ${query} 条结果',
+            empty: '找不到你查询的内容：${query}',
+            hit: '找到 ${hits} 条结果，用时 ${time} 毫秒',
             placeholder: '输入关键词快速查找',
         }
     },
@@ -262,4 +262,4 @@ document.addEventListener('pjax:error', (e) => {
     if (e.request.status === 404) {
         pjax.loadUrl('/404.html')
     }
-})</script><!-- inject custom body--><!-- search--><div id="algolia-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><button class="search-close-button"><i class="scoicon sco-close-fill"></i></button></nav><div class="search-wrap"><div class="search-box" id="search-input"></div><div id="search-results"><div id="algolia-hits"></div><div class="algolia-stats"></div><div class="algolia-poweredBy"></div></div></div></div><div id="search-mask"></div></div><script src="/js/extend/search/algolia-search.js"></script><!-- music--><div class="needEndHide" id="nav-music" onclick="sco.musicToggle()"><div id="nav-music-hoverTips">音乐已暂停</div><meting-js id="8407304077" server="netease" type="playlist" mutex="true" preload="none" data-lrctype="0" order="random" theme="var(--sco-main)"></meting-js></div></body></html><script>const posts=["posts/4a17b156.html"];function toRandomPost(){ pjax.loadUrl('/'+posts[Math.floor(Math.random()*posts.length)]); };</script>
+})</script><!-- inject custom body--><!-- search--><div id="algolia-search"><div class="search-dialog"><div class="search-dialog__title" id="algolia-search-title">搜索</div><div id="algolia-input-panel"><div id="algolia-search-input"></div></div><div id="search-results"><div id="algolia-hits"></div><div id="algolia-pagination"></div><div id="algolia-stats"></div><div class="algolia-poweredBy"></div></div><div id="algolia-tips"><i class="scoicon sco-algolia-fill"></i><span class="algolia-tips-text">Algolia 提供搜索服务</span></div><span class="search-close-button"><i class="scoicon sco-close-fill"></i></span></div><div id="search-mask"></div></div><script src="/js/extend/search/algolia-search.js"></script><!-- music--><div class="needEndHide" id="nav-music" onclick="sco.musicToggle()"><div id="nav-music-hoverTips">音乐已暂停</div><meting-js id="8407304077" server="netease" type="playlist" mutex="true" preload="none" data-lrctype="0" order="random" theme="var(--sco-main)"></meting-js></div></body></html><script>const posts=["posts/4a17b156.html"];function toRandomPost(){ pjax.loadUrl('/'+posts[Math.floor(Math.random()*posts.length)]); };</script>
