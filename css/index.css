@@ -2336,6 +2336,10 @@ div#author-info__sayhi:hover {
 #aside-content #card-toc .toc-content:before {
   display: none;
 }
+#aside-content .card-tag-cloud a[href*="/tags/Android%E5%BC%80%E5%8F%91/"] {
+  color: var(--sco-lighttext);
+  font-weight: 500;
+}
 * {
   box-sizing: border-box;
 }
