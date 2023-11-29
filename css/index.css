@@ -2388,8 +2388,8 @@ img.footer_mini_logo:hover {
     position: absolute;
     display: flex;
     z-index: 1;
-    content: "\e008";
-    font-family: scoicon, serif !important;
+    content: "\e015";
+    font-family: huifont, serif !important;
     align-items: center;
     justify-content: center;
     font-size: 22px;
