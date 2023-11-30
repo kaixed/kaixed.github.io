@@ -341,8 +341,7 @@ let sco = {
      * 个人信息顶部
      */
     changeSayHelloText: function () {
-        const greetings = ["🤖️ 数码科技爱好者", "🔍 分享与热心帮助", "🏠 智能家居小能手", "🔨 设计开发一条龙", "🏃 脚踏实地行动派", "🧱 团队小组发动机"];
-        // const greetings = ["🤖️ 数码科技爱好者", "🔍 分享与热心帮助", "🏠 智能家居小能手", "🔨 设计开发一条龙", "🤝 专修交互与设计", "🏃 脚踏实地行动派", "🧱 团队小组发动机", "💢 壮汉人狠话不多"];
+        const greetings = ["🤖️ 数码科技爱好者", "🔍 分享与热心帮助", "🏠 智能家居小能手", "🔨 设计开发一条龙", "🤝 专修交互与设计", "🏃 脚踏实地行动派", "🧱 团队小组发动机", "💢 壮汉人狠话不多"];
         const greetingElement = document.getElementById("author-info__sayhi");
         let randomGreeting = greetings[Math.floor(Math.random() * greetings.length)];
         while (randomGreeting === lastSayHello) {
