@@ -272,91 +272,6 @@ let wleelw_musicPlaying = false
 
 let sco = {
     /**
-     * 个性定位
-     */
-    card_welcome: function () {
-        ipLoacation = window.saveToLocal.get('ipLocation');
-        if (!ipLoacation) {
-            // 数据已过期或不存在
-            let script = document.createElement('script');
-            let url = `https://apis.map.qq.com/ws/location/v1/ip?key=${txkey}&output=jsonp`;
-            script.src = url;
-            window.QQmap = function (data) {
-                ipLoacation = data;
-                // 将数据保存到 localStorage，过期时间设置为 1 天
-                window.saveToLocal.set('ipLocation', ipLoacation, 1);
-                document.body.removeChild(script);
-                delete window.QQmap;
-            };
-            document.body.appendChild(script);
-        }
-        showWelcome();
-    },
-    /**
-     * 那年今日
-     */
-    card_history: function () {
-        if (document.getElementById('history-container')) {
-            async function fetchHistoryData() {
-                let myDate = new Date();
-                let myMonth = myDate.getMonth() + 1;
-                let getDate = myDate.getDate();
-                let getMonth = myMonth < 10 ? "0" + myMonth : "" + myMonth;
-                let getDay = getDate < 10 ? "0" + getDate : "" + getDate;
-                let getMonthDate = "S" + getMonth + getDay;
-                let history_data_url = `https://cdn.meuicat.com/gh/Zfour/Butterfly-card-history@2.08/${getMonth}.json`;
-
-                let response = await fetch(history_data_url);
-                let data = await response.json();
-                return data[getMonthDate];
-            }
-
-            function append(parent, text) {
-                let temp = document.createElement('div');
-                temp.innerHTML = text;
-                let frag = document.createDocumentFragment();
-                while (temp.firstChild) {
-                    frag.appendChild(temp.firstChild);
-                }
-                parent.appendChild(frag);
-            }
-
-            fetchHistoryData().then(data => {
-                let html_item = data.map(item => `
-            <div class="swiper-slide history_slide">
-                <span class="history_slide_time">A.D.${item.year}</span>
-                <span class="history_slide_link">${item.title}</span>
-            </div>
-        `).join('');
-                let history_container_wrapper = document.getElementById('history_container_wrapper');
-                append(history_container_wrapper, html_item);
-                let swiper_history = new Swiper('.history_swiper-container', {
-                    passiveListeners: true,
-                    spaceBetween: 30,
-                    effect: 'coverflow',
-                    coverflowEffect: {
-                        rotate: 30,
-                        slideShadows: false,
-                    },
-                    loop: true,
-                    direction: 'vertical',
-                    autoplay: {
-                        disableOnInteraction: true,
-                        delay: 5000
-                    },
-                    mousewheel: false,
-                });
-                let history_container = document.getElementById('history-container');
-                history_container.onmouseenter = function () {
-                    swiper_history.autoplay.stop();
-                };
-                history_container.onmouseleave = function () {
-                    swiper_history.autoplay.start();
-                }
-            });
-        }
-    },
-    /**
      * 隐藏协议小助手
      */
     hideCookie: function () {
@@ -426,7 +341,8 @@ let sco = {
      * 个人信息顶部
      */
     changeSayHelloText: function () {
-        const greetings = ["🤖️ 数码科技爱好者", "🔍 分享与热心帮助", "🏠 智能家居小能手", "🔨 设计开发一条龙", "🤝 专修交互与设计", "🏃 脚踏实地行动派", "🧱 团队小组发动机", "💢 壮汉人狠话不多"];
+        const greetings = ["🤖️ 数码科技爱好者", "🔍 分享与热心帮助", "🏠 智能家居小能手", "🔨 设计开发一条龙", "🏃 脚踏实地行动派", "🧱 团队小组发动机"];
+        // const greetings = ["🤖️ 数码科技爱好者", "🔍 分享与热心帮助", "🏠 智能家居小能手", "🔨 设计开发一条龙", "🤝 专修交互与设计", "🏃 脚踏实地行动派", "🧱 团队小组发动机", "💢 壮汉人狠话不多"];
         const greetingElement = document.getElementById("author-info__sayhi");
         let randomGreeting = greetings[Math.floor(Math.random() * greetings.length)];
         while (randomGreeting === lastSayHello) {
@@ -576,7 +492,7 @@ let sco = {
         }
     },
     /**
-     * 图片添加盲水印
+     * 图片添加水印
      */
     addPhotoFigcaption: function () {
         let images = document.querySelectorAll('#article-container img');
@@ -596,55 +512,61 @@ let sco = {
     /**
      * 下载图片并添加水印
      */
-    downloadImage: function (e, t) {
+    downloadImage: async function (url, filename) {
         rm.hideRightMenu();
-        if (0 == rm.downloadimging) {
-            rm.downloadimging = !0;
-            utils.snackbarShow("正在下载中，请稍后", !1, 1e4);
-            setTimeout((function () {
-                let o = new Image;
-                o.setAttribute("crossOrigin", "anonymous");
-                o.onload = function () {
-                    let e = document.createElement("canvas");
-                    e.width = o.width;
-                    e.height = o.height;
-                    e.getContext("2d").drawImage(o, 0, 0, o.width, o.height);
-                    let n = e.toDataURL("image/png");
-                    let a = document.createElement("a");
-                    let l = new MouseEvent("click");
-                    a.download = t || "photo";
-                    a.href = n;
-                    a.dispatchEvent(l);
-                };
-                o.src = e;
-                utils.snackbarShow("图片已添加盲水印，请遵守版权协议");
-                rm.downloadimging = !1;
-            }), "10000");
-        } else {
+        if (rm.downloadimging) {
             utils.snackbarShow("有正在进行中的下载，请稍后再试");
+            return;
+        }
+        try {
+            rm.downloadimging = true;
+            utils.snackbarShow("正在下载中，请稍后", false, 10000);
+            await new Promise(resolve => setTimeout(resolve, 10000));
+            const img = new Image();
+            img.setAttribute("crossOrigin", "anonymous");
+            img.onload = function () {
+                const canvas = document.createElement("canvas");
+                const ctx = canvas.getContext("2d");
+                canvas.width = img.width;
+                canvas.height = img.height;
+                ctx.drawImage(img, 0, 0, img.width, img.height);
+                ctx.font = "30px Arial";
+                ctx.fillText(window.location.href, 10, img.height - 10);
+                const dataUrl = canvas.toDataURL("image/png");
+                const link = document.createElement("a");
+                const event = new MouseEvent("click");
+                link.download = filename || "photo";
+                link.href = dataUrl;
+                link.dispatchEvent(event);
+                utils.snackbarShow("图片已添加盲水印，请遵守版权协议");
+                rm.downloadimging = false;
+            };
+            img.src = url;
+        } catch (error) {
+            console.error(error);
+            utils.snackbarShow("下载图片时出错");
+            rm.downloadimging = false;
         }
     },
     /**
      * 音乐播放暂停
      */
     musicToggle: function () {
-        const $music = document.querySelector('#nav-music'),
-            $meting = document.querySelector('meting-js'),
-            $console = document.getElementById('consoleMusic')
+        const $music = document.querySelector('#nav-music');
+        const $meting = document.querySelector('meting-js');
+        const $console = document.getElementById('consoleMusic');
+        const $toggleButton = document.getElementById('menu-music-toggle');
+        wleelw_musicPlaying = !wleelw_musicPlaying;
+        $music.classList.toggle("playing", wleelw_musicPlaying);
+        $console.classList.toggle("on", wleelw_musicPlaying);
         if (wleelw_musicPlaying) {
-            $music.classList.remove("playing")
-            $console.classList.remove("on")
-            wleelw_musicPlaying = false;
-            $meting.aplayer.pause();
-            document.getElementById('menu-music-toggle').innerHTML = `<i class="scoicon sco-play-fill"></i><span>播放音乐</span>`
-        } else {
-            $music.classList.add("playing")
-            $console.classList.add("on")
-            wleelw_musicPlaying = true;
             $meting.aplayer.play();
-            document.getElementById('menu-music-toggle').innerHTML = `<i class="scoicon sco-pause-fill"></i><span>暂停音乐</span>`
+            $toggleButton.innerHTML = `<i class="scoicon sco-pause-fill"></i><span>暂停音乐</span>`;
+        } else {
+            $meting.aplayer.pause();
+            $toggleButton.innerHTML = `<i class="scoicon sco-play-fill"></i><span>播放音乐</span>`;
         }
-        rm.hideRightMenu()
+        rm.hideRightMenu();
     },
     /**
      * 音乐上一首
@@ -664,12 +586,8 @@ let sco = {
      * 获取歌曲名称
      */
     musicGetName: function () {
-        var e = document.querySelectorAll('.aplayer-title');
-        var t = [];
-        for (var o = e.length - 1; o >= 0; o--) {
-            t[o] = e[o].innerText;
-        }
-        return t[0];
+        const titles = Array.from(document.querySelectorAll('.aplayer-title')).map(e => e.innerText);
+        return titles[0];
     },
     /**
      * 跳转到评论
@@ -681,25 +599,20 @@ let sco = {
      * 一些日子灰色页面
      */
     setFest: function () {
-        let date = new Date();
-        let currentDate = (date.getMonth() + 1) + '.' + date.getDate();
+        const date = new Date();
+        const currentDate = `${date.getMonth() + 1}.${date.getDate()}`;
 
         const specialDates = ['1.8', '9.9', '7.7', '9.18', '12.13'];
 
         if (specialDates.includes(currentDate)) {
             const css = `
-            html {
-                -webkit-filter: grayscale(100%);
-                -moz-filter: grayscale(100%);
-                -ms-filter: grayscale(100%);
-                -o-filter: grayscale(100%);
-                filter: progid:DXImageTransform.Microsoft.BasicImage(grayscale=1);
-                _filter: none;
-            }
+        html {
+            filter: grayscale(100%);
+        }
         `;
 
             const styleElement = document.createElement('style');
-            styleElement.appendChild(document.createTextNode(css));
+            styleElement.textContent = css;
             document.head.appendChild(styleElement);
         }
     },
@@ -766,7 +679,6 @@ let sco = {
                 item.classList.remove("select");
             });
         }
-
         if (decodedPath === "/") {
             if (categoryBar) {
                 const homeItem = document.getElementById("category-bar-home");
@@ -789,21 +701,11 @@ let sco = {
      * categoryBarRightButton
      */
     scrollCategoryBarToRight: function () {
-        // 定义一个变量用于存储 setTimeout 返回的 ID
         let timeoutId;
-
-        // 获取滚动条元素和下一个元素
         let scrollBar = document.getElementById("category-bar-items");
         let nextElement = document.getElementById("category-bar-next");
-
-        // 获取滚动条元素的宽度
         let scrollBarWidth = scrollBar.clientWidth;
-
-        // 检查滚动条是否存在
         if (scrollBar) {
-            // 如果滚动条的滚动位置加上其宽度大于或等于其滚动宽度（减去8，可能是为了留出一些边距），
-            // 则将其滚动位置设置为0（即滚动到最左端）。
-            // 否则，将其滚动位置向右移动其宽度的距离（即滚动一个元素的宽度）。
             if (scrollBar.scrollLeft + scrollBar.clientWidth >= scrollBar.scrollWidth - 8) {
                 scrollBar.scroll({
                     left: 0,
@@ -815,24 +717,14 @@ let sco = {
                     behavior: "smooth"
                 });
             }
-
-            // 为滚动条添加一个滚动事件监听器
             scrollBar.addEventListener("scroll", function onScroll() {
-                // 清除之前的定时器
                 clearTimeout(timeoutId);
-
-                // 启动一个新的定时器，在150毫秒后执行以下操作：
                 timeoutId = setTimeout(function () {
-                    // 如果滚动条的滚动位置加上其宽度大于或等于其滚动宽度（减去8），
-                    // 则将下一个元素的 transform 样式设置为 "rotate(180deg)"（即旋转180度）。
-                    // 否则，清除下一个元素的 transform 样式。
                     if (scrollBar.scrollLeft + scrollBar.clientWidth >= scrollBar.scrollWidth - 8) {
                         nextElement.style.transform = "rotate(180deg)";
                     } else {
                         nextElement.style.transform = "";
                     }
-
-                    // 移除滚动条的滚动事件监听器
                     scrollBar.removeEventListener("scroll", onScroll);
                 }, 150);
             });
@@ -842,18 +734,11 @@ let sco = {
      * 打开侧边栏标签隐藏
      */
     openAllTags: function () {
-        // 获取所有的 ".card-allinfo .card-tag-cloud" 元素
         let tagCloudElements = document.querySelectorAll(".card-allinfo .card-tag-cloud");
-
-        // 遍历这些元素，为每个元素添加 "all-tags" 类
         tagCloudElements.forEach(function (tagCloudElement) {
             tagCloudElement.classList.add("all-tags");
         });
-
-        // 获取 "more-tags-btn" 元素
         let moreTagsButton = document.getElementById("more-tags-btn");
-
-        // 如果 "more-tags-btn" 元素存在，那么移除它
         if (moreTagsButton) {
             moreTagsButton.parentNode.removeChild(moreTagsButton);
         }
@@ -896,6 +781,22 @@ let sco = {
                 pageText.value = lastPageNumber;
             }
         });
+    },
+    /**
+     * 初始化Nav背景
+     */
+    addNavBackgroundInit: function () {
+        var scrollTop = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop || 0;
+        if (scrollTop !== 0) {
+            var pageHeader = document.getElementById("page-header");
+            if (pageHeader) {
+                pageHeader.classList.add("nav-fixed", "nav-visible");
+            }
+            var cookiesWindow = document.getElementById("cookies-window");
+            if (cookiesWindow) {
+                cookiesWindow.style.display = 'none';
+            }
+        }
     }
 }
 
@@ -904,64 +805,63 @@ let sco = {
  */
 class hightlight {
     static createEle(langEl, item) {
-        const fragment = document.createDocumentFragment()
-        const highlightCopyEle = '<i class="scoicon sco-copy-fill"></i>'
-        const highlightExpandEle = '<i class="scoicon sco-arrow-down expand" style="font-size: 16px"></i>'
+        const fragment = document.createDocumentFragment();
+        const highlightCopyEle = '<i class="scoicon sco-copy-fill"></i>';
+        const highlightExpandEle = '<i class="scoicon sco-arrow-down expand" style="font-size: 16px"></i>';
 
-        const hlTools = document.createElement('div')
-        hlTools.className = `highlight-tools`
-        hlTools.innerHTML = highlightExpandEle + langEl + highlightCopyEle
-        let expand = true
-        hlTools.children[0].addEventListener('click', (e) => {
-            if (expand) {
-                hlTools.children[0].classList.add('closed')
-                $table.setAttribute('style', 'display:none')
-                if ($expand.length !== 0) {
-                    $expand[0].setAttribute('style', 'display:none')
-                }
-            } else {
-                hlTools.children[0].classList.remove('closed')
-                $table.setAttribute('style', 'display:block')
-                if ($expand.length !== 0) {
-                    $expand[0].setAttribute('style', 'display:block')
-                }
-                if (itemHeight < 200) {
-                    $table.setAttribute('style', 'height: auto')
-                } else {
-                    $table.setAttribute('style', 'height:200px')
-                    ele.classList.remove("expand-done")
+        const hlTools = document.createElement('div');
+        hlTools.className = 'highlight-tools';
+        hlTools.innerHTML = `${highlightExpandEle}${langEl}${highlightCopyEle}`;
+
+        const itemHeight = item.clientHeight;
+        const $table = item.querySelector('table');
+        const $expand = item.getElementsByClassName('code-expand-btn');
+
+        let expand = true;
+        hlTools.children[0].addEventListener('click', () => {
+            expand = !expand;
+            hlTools.children[0].classList.toggle('closed');
+            $table.style.display = expand ? 'none' : 'block';
+            if ($expand.length !== 0) {
+                $expand[0].style.display = expand ? 'none' : 'block';
+            }
+            if (!expand) {
+                $table.style.height = itemHeight < 200 ? 'auto' : '200px';
+                if (itemHeight >= 200) {
+                    item.classList.remove("expand-done");
                 }
             }
-            expand = !expand
-        })
-        hlTools.children[2].addEventListener('click', (e) => {
-            utils.copy($table.querySelector('.code').innerText)
-        })
-        const ele = document.createElement('div')
-        fragment.appendChild(hlTools)
-        const itemHeight = item.clientHeight, $table = item.querySelector('table'),
-            $expand = item.getElementsByClassName('code-expand-btn')
+        });
+
+        hlTools.children[2].addEventListener('click', () => {
+            utils.copy($table.querySelector('.code').innerText);
+        });
+
+        fragment.appendChild(hlTools);
+
         if (GLOBAL_CONFIG.hightlight.limit && itemHeight > GLOBAL_CONFIG.hightlight.limit + 30) {
-            $table.setAttribute('style', `height: ${GLOBAL_CONFIG.hightlight.limit}px`)
-            ele.className = 'code-expand-btn'
-            ele.innerHTML = '<i class="scoicon sco-show-line" style="font-size: 1.2rem"></i>'
+            $table.style.height = `${GLOBAL_CONFIG.hightlight.limit}px`;
+            const ele = document.createElement('div');
+            ele.className = 'code-expand-btn';
+            ele.innerHTML = '<i class="scoicon sco-show-line" style="font-size: 1.2rem"></i>';
             ele.addEventListener('click', (e) => {
-                $table.setAttribute('style', `height: ${itemHeight}px`)
-                e.target.className !== 'code-expand-btn' ? e.target.parentNode.classList.add('expand-done') : e.target.classList.add('expand-done')
-            })
-            fragment.appendChild(ele)
+                $table.style.height = `${itemHeight}px`;
+                const target = e.target.className !== 'code-expand-btn' ? e.target.parentNode : e.target;
+                target.classList.add('expand-done');
+            });
+            fragment.appendChild(ele);
         }
-        item.insertBefore(fragment, item.firstChild)
+        item.insertBefore(fragment, item.firstChild);
     }
 
     static init() {
-        const $figureHighlight = document.querySelectorAll('figure.highlight'), that = this
-        $figureHighlight.forEach(function (item) {
-            let langName = item.getAttribute('class').split(' ')[1]
-            if (langName === 'plaintext' || langName === undefined) langName = 'Code'
-            const highlightLangEle = `<div class="code-lang">${langName.toUpperCase()}</div>`
-            that.createEle(highlightLangEle, item)
-        })
+        const $figureHighlight = document.querySelectorAll('figure.highlight');
+        $figureHighlight.forEach(item => {
+            let langName = item.classList[1] || 'Code';
+            if (langName === 'plaintext') langName = 'Code';
+            const highlightLangEle = `<div class="code-lang">${langName.toUpperCase()}</div>`;
+            this.createEle(highlightLangEle, item);
+        });
     }
 }
 
@@ -1016,6 +916,7 @@ window.refreshFn = () => {
     sco.tagPageActive()
     sco.categoriesBarActive()
     sco.listenToPageInputPress()
+    sco.addNavBackgroundInit()
     GLOBAL_CONFIG.rightside.enable && addRightMenuClickEvent()
     GLOBAL_CONFIG.lazyload.enable && sco.lazyloadImg()
     GLOBAL_CONFIG.lightbox && sco.lightbox('')
@@ -1035,8 +936,6 @@ window.refreshFn = () => {
     }
     GLOBAL_CONFIG.covercolor && coverColor();
     sco.initConsoleState()
-    if (document.getElementById('history-baidu')) sco.card_history() // 那年今日
-    if (document.getElementById('welcome-info')) sco.card_welcome() // 个性定位
     if (GLOBAL_CONFIG.comment.type === "twikoo" && PAGE_CONFIG.comment) initializeCommentBarrage() // 热评
 }
 
