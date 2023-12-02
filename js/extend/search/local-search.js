@@ -71,7 +71,7 @@ window.onload = () => {
         $search.addEventListener('keydown', function (e) {
                 if (e.keyCode === 13) {
                     $results.innerHTML = '';
-                    query = this.value;
+                    query = this.value.trim();
                     results = search(query);
                     renderResults(results, currentPage);
                     renderPagination(results.length);
@@ -83,6 +83,7 @@ window.onload = () => {
     function search(query) {
         return idx.search(query).map(result => {
             return store.filter(page => {
+                console.log(result)
                 return page.link === result.ref;
             })[0];
         });
