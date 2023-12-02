@@ -2,7 +2,25 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
-    <loc>https://blog.kaixed.com/p/4a17b156.html</loc>
+    <loc>https://blog.kaixed.com/links/index.html</loc>
+    
+    <lastmod>2023-12-02</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://blog.kaixed.com/privacy/index.html</loc>
+    
+    <lastmod>2023-12-02</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://blog.kaixed.com/tlink/index.html</loc>
     
     <lastmod>2023-12-02</lastmod>
     
@@ -55,33 +73,6 @@
     <priority>0.6</priority>
   </url>
   
-  <url>
-    <loc>https://blog.kaixed.com/links/index.html</loc>
-    
-    <lastmod>2023-12-02</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://blog.kaixed.com/privacy/index.html</loc>
-    
-    <lastmod>2023-12-02</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://blog.kaixed.com/tlink/index.html</loc>
-    
-    <lastmod>2023-12-02</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
 
   <url>
     <loc>https://blog.kaixed.com/</loc>
@@ -93,13 +84,6 @@
   
   <url>
     <loc>https://blog.kaixed.com/tags/hello/</loc>
-    <lastmod>2023-12-02</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://blog.kaixed.com/tags/haha/</loc>
     <lastmod>2023-12-02</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>

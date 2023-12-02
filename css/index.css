@@ -1077,6 +1077,25 @@ svg.scoicon.tab {
   overflow: hidden;
   padding-right: 5px;
 }
+i.huifont {
+  font-size: 22px;
+  line-height: 1;
+}
+svg.huifont {
+  width: 1em;
+  height: 1em;
+  vertical-align: -0.15em;
+  fill: currentColor;
+  overflow: hidden;
+}
+svg.huifont.tab {
+  width: 1.5em;
+  height: 1.5em;
+  vertical-align: -0.15em;
+  fill: currentColor;
+  overflow: hidden;
+  padding-right: 5px;
+}
 #page img {
   border-radius: 12px;
 }
