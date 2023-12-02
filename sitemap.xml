@@ -11,6 +11,15 @@
   </url>
   
   <url>
+    <loc>https://blog.kaixed.com/p/4a17b156.html</loc>
+    
+    <lastmod>2023-12-02</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>https://blog.kaixed.com/about/index.html</loc>
     
     <lastmod>2023-12-02</lastmod>
@@ -84,6 +93,13 @@
   
   <url>
     <loc>https://blog.kaixed.com/tags/hello/</loc>
+    <lastmod>2023-12-02</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://blog.kaixed.com/tags/haha/</loc>
     <lastmod>2023-12-02</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
