@@ -1631,7 +1631,7 @@ div#sco-footer-bar .footer-bar-description {
   border-radius: 12px;
 }
 #sco-footer .footer-item:hover {
-  color: var(--sco-theme);
+  color: var(--sco-main);
   background: var(--sco-main-op-light);
 }
 #sco-footer .footer-group {
