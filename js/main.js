@@ -13,19 +13,19 @@ const adjustMenu = (change = false) => {
     const $nav = document.getElementById('nav')
     let t
     if (window.innerWidth < 768) t = true
-    else t = blogNameWidth + menusWidth + searchWidth > $nav.offsetWidth - 120
+    else t = blogNameWidth + menusWidth + searchWidth > $nav?.offsetWidth - 120
 
     if (t) {
-        $nav.classList.add('hide-menu')
+        $nav?.classList.add('hide-menu')
     } else {
-        $nav.classList.remove('hide-menu')
+        $nav?.classList.remove('hide-menu')
     }
 }
 
 // 初始化header
 const initAdjust = () => {
     adjustMenu()
-    document.getElementById('nav').classList.add('show')
+    document.getElementById('nav')?.classList.add('show')
 }
 
 /**
@@ -37,16 +37,14 @@ const sidebarFn = () => {
     const $menuMask = document.getElementById('menu-mask')
     const $body = document.body
 
-    const isOpen = () => $mobileSidebarMenus.classList.contains('open')
-
-    function openMobileSidebar() {
+    function openMobileSidebar () {
         utils.sidebarPaddingR()
         $body.style.overflow = 'hidden'
         utils.fadeIn($menuMask, 0.5)
         $mobileSidebarMenus.classList.add('open')
     }
 
-    function closeMobileSidebar() {
+    function closeMobileSidebar () {
         $body.style.overflow = ''
         $body.style.paddingRight = ''
         utils.fadeOut($menuMask, 0.5)
@@ -55,15 +53,15 @@ const sidebarFn = () => {
 
     $toggleMenu.addEventListener('click', openMobileSidebar)
 
-    $menuMask.addEventListener('click', () => {
-        if (isOpen()) {
+    $menuMask.addEventListener('click', e => {
+        if ($mobileSidebarMenus.classList.contains('open')) {
             closeMobileSidebar()
         }
     })
 
-    window.addEventListener('resize', () => {
-        if (utils.isHidden($toggleMenu) && isOpen()) {
-            closeMobileSidebar()
+    window.addEventListener('resize', e => {
+        if (utils.isHidden($toggleMenu)) {
+            if ($mobileSidebarMenus.classList.contains('open')) closeMobileSidebar()
         }
     })
 }
@@ -187,10 +185,10 @@ const initObserver = () => {
         entries.forEach(function (entry) {
             if (entry.isIntersecting) {
                 paginationElement.classList.add("show-window");
-                document.querySelector(".comment-barrage").style.bottom = "-200px";
+                GLOBAL_CONFIG.comment.commentBarrage && (document.querySelector(".comment-barrage").style.bottom = "-200px");
             } else {
                 paginationElement.classList.remove("show-window");
-                document.querySelector(".comment-barrage").style.bottom = "0px";
+                GLOBAL_CONFIG.comment.commentBarrage && (document.querySelector(".comment-barrage").style.bottom = "0px");
             }
         });
     }
@@ -271,6 +269,91 @@ let lastSayHello = "";
 let wleelw_musicPlaying = false
 
 let sco = {
+    /**
+     * 个性定位
+     */
+    card_welcome: function () {
+        ipLoacation = window.saveToLocal.get('ipLocation');
+        if (!ipLoacation) {
+            // 数据已过期或不存在
+            let script = document.createElement('script');
+            let url = `https://apis.map.qq.com/ws/location/v1/ip?key=${txkey}&output=jsonp`;
+            script.src = url;
+            window.QQmap = function (data) {
+                ipLoacation = data;
+                // 将数据保存到 localStorage，过期时间设置为 1 天
+                window.saveToLocal.set('ipLocation', ipLoacation, 1);
+                document.body.removeChild(script);
+                delete window.QQmap;
+            };
+            document.body.appendChild(script);
+        }
+        showWelcome();
+    },
+    /**
+     * 那年今日
+     */
+    card_history: function () {
+        if (document.getElementById('history-container')) {
+            async function fetchHistoryData() {
+                let myDate = new Date();
+                let myMonth = myDate.getMonth() + 1;
+                let getDate = myDate.getDate();
+                let getMonth = myMonth < 10 ? "0" + myMonth : "" + myMonth;
+                let getDay = getDate < 10 ? "0" + getDate : "" + getDate;
+                let getMonthDate = "S" + getMonth + getDay;
+                let history_data_url = `https://cdn.meuicat.com/gh/Zfour/Butterfly-card-history@2.08/${getMonth}.json`;
+
+                let response = await fetch(history_data_url);
+                let data = await response.json();
+                return data[getMonthDate];
+            }
+
+            function append(parent, text) {
+                let temp = document.createElement('div');
+                temp.innerHTML = text;
+                let frag = document.createDocumentFragment();
+                while (temp.firstChild) {
+                    frag.appendChild(temp.firstChild);
+                }
+                parent.appendChild(frag);
+            }
+
+            fetchHistoryData().then(data => {
+                let html_item = data.map(item => `
+            <div class="swiper-slide history_slide">
+                <span class="history_slide_time">A.D.${item.year}</span>
+                <span class="history_slide_link">${item.title}</span>
+            </div>
+        `).join('');
+                let history_container_wrapper = document.getElementById('history_container_wrapper');
+                append(history_container_wrapper, html_item);
+                let swiper_history = new Swiper('.history_swiper-container', {
+                    passiveListeners: true,
+                    spaceBetween: 30,
+                    effect: 'coverflow',
+                    coverflowEffect: {
+                        rotate: 30,
+                        slideShadows: false,
+                    },
+                    loop: true,
+                    direction: 'vertical',
+                    autoplay: {
+                        disableOnInteraction: true,
+                        delay: 5000
+                    },
+                    mousewheel: false,
+                });
+                let history_container = document.getElementById('history-container');
+                history_container.onmouseenter = function () {
+                    swiper_history.autoplay.stop();
+                };
+                history_container.onmouseleave = function () {
+                    swiper_history.autoplay.start();
+                }
+            });
+        }
+    },
     /**
      * 隐藏协议小助手
      */
@@ -818,7 +901,7 @@ let sco = {
 
             document.getElementById("toPageButton").href = targetPageUrl;
         }
-    }
+    },
 }
 
 /*
@@ -828,7 +911,7 @@ class hightlight {
     static createEle(langEl, item) {
         const fragment = document.createDocumentFragment()
         const highlightCopyEle = '<i class="scoicon sco-copy-fill"></i>'
-        const highlightExpandEle = '<i class="scoicon sco-arrow-down expand" style="font-size: 16px"></i>'
+        const highlightExpandEle = '<i class="scoicon sco-arrow-down expand"></i>'
 
         const hlTools = document.createElement('div')
         hlTools.className = `highlight-tools`
@@ -838,6 +921,7 @@ class hightlight {
             if (expand) {
                 hlTools.children[0].classList.add('closed')
                 $table.setAttribute('style', 'display:none')
+                console.log($expand.length)
                 if ($expand.length !== 0) {
                     $expand[0].setAttribute('style', 'display:none')
                 }
@@ -863,14 +947,13 @@ class hightlight {
         fragment.appendChild(hlTools)
         const itemHeight = item.clientHeight, $table = item.querySelector('table'),
             $expand = item.getElementsByClassName('code-expand-btn')
-
         if (GLOBAL_CONFIG.hightlight.limit && itemHeight > GLOBAL_CONFIG.hightlight.limit + 30) {
             $table.setAttribute('style', `height: ${GLOBAL_CONFIG.hightlight.limit}px`)
             ele.className = 'code-expand-btn'
             ele.innerHTML = '<i class="scoicon sco-show-line" style="font-size: 1.2rem"></i>'
             ele.addEventListener('click', (e) => {
                 $table.setAttribute('style', `height: ${itemHeight}px`)
-                e.target.className !== 'code-expand-btn' ? e.target.parentNode.classList.add('expand-done') : e.target.classList.add('expand-done')
+                e.target.classList.add('expand-done')
             })
             fragment.appendChild(ele)
         }
@@ -925,7 +1008,6 @@ class tabs {
 }
 
 window.refreshFn = () => {
-    if (PAGE_CONFIG.page === "404") return;
     initAdjust()
     scrollFn()
     sidebarFn()
@@ -944,9 +1026,9 @@ window.refreshFn = () => {
     GLOBAL_CONFIG.lazyload.enable && sco.lazyloadImg()
     GLOBAL_CONFIG.lightbox && sco.lightbox('')
     GLOBAL_CONFIG.randomlinks && randomLinksList()
-    GLOBAL_CONFIG.comment.enable && newestCommentInit()
     if (PAGE_CONFIG.comment) {
         initComment()
+        PAGE_CONFIG.page === "links" && checkForm()
     }
     PAGE_CONFIG.toc && toc.init()
     if (PAGE_CONFIG.is_post || PAGE_CONFIG.is_page) {
@@ -959,10 +1041,10 @@ window.refreshFn = () => {
     }
     GLOBAL_CONFIG.covercolor && coverColor();
     sco.initConsoleState()
+    document.getElementById('history-baidu') && sco.card_history() // 那年今日
+    document.getElementById('welcome-info') && sco.card_welcome() // 个性定位
     GLOBAL_CONFIG.comment.enable && newestCommentInit() // 最新评论
-    if (GLOBAL_CONFIG.comment.type === "twikoo" && PAGE_CONFIG.comment) {
-        initializeCommentBarrage() // 热评
-    }
+    GLOBAL_CONFIG.comment.commentBarrage && initializeCommentBarrage() // 热评
 }
 
 sco.initTheme()
