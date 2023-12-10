@@ -37,14 +37,14 @@ const sidebarFn = () => {
     const $menuMask = document.getElementById('menu-mask')
     const $body = document.body
 
-    function openMobileSidebar () {
+    function openMobileSidebar() {
         utils.sidebarPaddingR()
         $body.style.overflow = 'hidden'
         utils.fadeIn($menuMask, 0.5)
         $mobileSidebarMenus.classList.add('open')
     }
 
-    function closeMobileSidebar () {
+    function closeMobileSidebar() {
         $body.style.overflow = ''
         $body.style.paddingRight = ''
         utils.fadeOut($menuMask, 0.5)
@@ -270,91 +270,6 @@ let wleelw_musicPlaying = false
 
 let sco = {
     /**
-     * 个性定位
-     */
-    card_welcome: function () {
-        ipLoacation = window.saveToLocal.get('ipLocation');
-        if (!ipLoacation) {
-            // 数据已过期或不存在
-            let script = document.createElement('script');
-            let url = `https://apis.map.qq.com/ws/location/v1/ip?key=${txkey}&output=jsonp`;
-            script.src = url;
-            window.QQmap = function (data) {
-                ipLoacation = data;
-                // 将数据保存到 localStorage，过期时间设置为 1 天
-                window.saveToLocal.set('ipLocation', ipLoacation, 1);
-                document.body.removeChild(script);
-                delete window.QQmap;
-            };
-            document.body.appendChild(script);
-        }
-        showWelcome();
-    },
-    /**
-     * 那年今日
-     */
-    card_history: function () {
-        if (document.getElementById('history-container')) {
-            async function fetchHistoryData() {
-                let myDate = new Date();
-                let myMonth = myDate.getMonth() + 1;
-                let getDate = myDate.getDate();
-                let getMonth = myMonth < 10 ? "0" + myMonth : "" + myMonth;
-                let getDay = getDate < 10 ? "0" + getDate : "" + getDate;
-                let getMonthDate = "S" + getMonth + getDay;
-                let history_data_url = `https://cdn.meuicat.com/gh/Zfour/Butterfly-card-history@2.08/${getMonth}.json`;
-
-                let response = await fetch(history_data_url);
-                let data = await response.json();
-                return data[getMonthDate];
-            }
-
-            function append(parent, text) {
-                let temp = document.createElement('div');
-                temp.innerHTML = text;
-                let frag = document.createDocumentFragment();
-                while (temp.firstChild) {
-                    frag.appendChild(temp.firstChild);
-                }
-                parent.appendChild(frag);
-            }
-
-            fetchHistoryData().then(data => {
-                let html_item = data.map(item => `
-            <div class="swiper-slide history_slide">
-                <span class="history_slide_time">A.D.${item.year}</span>
-                <span class="history_slide_link">${item.title}</span>
-            </div>
-        `).join('');
-                let history_container_wrapper = document.getElementById('history_container_wrapper');
-                append(history_container_wrapper, html_item);
-                let swiper_history = new Swiper('.history_swiper-container', {
-                    passiveListeners: true,
-                    spaceBetween: 30,
-                    effect: 'coverflow',
-                    coverflowEffect: {
-                        rotate: 30,
-                        slideShadows: false,
-                    },
-                    loop: true,
-                    direction: 'vertical',
-                    autoplay: {
-                        disableOnInteraction: true,
-                        delay: 5000
-                    },
-                    mousewheel: false,
-                });
-                let history_container = document.getElementById('history-container');
-                history_container.onmouseenter = function () {
-                    swiper_history.autoplay.stop();
-                };
-                history_container.onmouseleave = function () {
-                    swiper_history.autoplay.start();
-                }
-            });
-        }
-    },
-    /**
      * 隐藏协议小助手
      */
     hideCookie: function () {
@@ -441,12 +356,12 @@ let sco = {
             'light'
         if (nowMode === 'light') {
             document.documentElement.setAttribute('data-theme', 'dark')
-            saveToLocal.set('theme', 'dark', 0.04);
+            saveToLocal.set('theme', 'dark', 0.02);
             utils.snackbarShow(GLOBAL_CONFIG.lang.theme.dark, false, 2000)
             document.querySelector(".menu-darkmode-text").textContent = "深色模式";
         } else {
             document.documentElement.setAttribute('data-theme', 'light')
-            saveToLocal.set('theme', 'light', 0.04);
+            saveToLocal.set('theme', 'light', 0.02);
             utils.snackbarShow(GLOBAL_CONFIG.lang.theme.light, false, 2000)
             document.querySelector(".menu-darkmode-text").textContent = "浅色模式";
         }
@@ -488,23 +403,15 @@ let sco = {
      * 初始化
      */
     initTheme: function () {
-        let isDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches;
-        try {
-            const cachedMode = saveToLocal.get('theme');
-            if (cachedMode === undefined) {
-                const nowMode =
-                    isDarkMode ? 'dark' : 'light'
-                document.documentElement.setAttribute('data-theme', nowMode);
-                saveToLocal.set('theme', nowMode, 0.5);
-            } else {
-                document.documentElement.setAttribute('data-theme', cachedMode);
-            }
-        } catch (e) {
-            if (isDarkMode) {
-                saveToLocal.set('theme', 'dark', 0.5)
-            } else {
-                saveToLocal.set('theme', 'light', 0.5)
-            }
+        let isDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches
+        const cachedMode = saveToLocal.get('theme');
+        if (cachedMode === undefined) {
+            const nowMode =
+                isDarkMode ? 'dark' : 'light'
+            document.documentElement.setAttribute('data-theme', nowMode);
+            saveToLocal.set('theme', nowMode, 0.5);
+        } else {
+            document.documentElement.setAttribute('data-theme', cachedMode);
         }
     },
     /**
@@ -1026,23 +933,13 @@ window.refreshFn = () => {
     GLOBAL_CONFIG.lazyload.enable && sco.lazyloadImg()
     GLOBAL_CONFIG.lightbox && sco.lightbox('')
     GLOBAL_CONFIG.randomlinks && randomLinksList()
-    if (PAGE_CONFIG.comment) {
-        initComment()
-        PAGE_CONFIG.page === "links" && checkForm()
-    }
+    PAGE_CONFIG.comment && initComment()
     PAGE_CONFIG.toc && toc.init()
-    if (PAGE_CONFIG.is_post || PAGE_CONFIG.is_page) {
-        GLOBAL_CONFIG.hightlight.enable && hightlight.init()
-        tabs.init()
-    }
-    if (PAGE_CONFIG.is_home) {
-        showTodayCard()
-        sco.initbbtalk()
-    }
-    GLOBAL_CONFIG.covercolor && coverColor();
+    PAGE_CONFIG.is_post || PAGE_CONFIG.is_page && tabs.init() && (GLOBAL_CONFIG.hightlight.enable && hightlight.init())
+    PAGE_CONFIG.is_home && (showTodayCard() || sco.initbbtalk())
+    GLOBAL_CONFIG.covercolor && coverColor()
     sco.initConsoleState()
-    GLOBAL_CONFIG.comment.enable && newestCommentInit() // 最新评论
-    GLOBAL_CONFIG.comment.commentBarrage && PAGE_CONFIG.comment && initializeCommentBarrage() // 热评
+    GLOBAL_CONFIG.comment.commentBarrage && PAGE_CONFIG.comment && initializeCommentBarrage()
 }
 
 sco.initTheme()
@@ -1057,4 +954,4 @@ document.addEventListener('pjax:complete', () => {
 
 window.onkeydown = function (e) {
     123 === e.keyCode && utils.snackbarShow("开发者模式已打开，请遵循GPL协议", !1, 3e3)
-};
+}

@@ -834,6 +834,7 @@
   --ai-border: 1px solid rgba(227,232,247,0.741);
   --ai-tag-bg: rgba(48,52,63,0.86);
   --ai-cursor: #333;
+  --icat-card-welcome: #49b1f5;
 }
 @media screen and (max-width: 768px) {
   :root {
@@ -2170,7 +2171,7 @@ figure {
 #page-header #nav #nav-left .nav-button a i,
 #page-header #nav #nav-right .nav-button a i {
   line-height: 1;
-  font-size: 22px;
+  font-size: 1rem;
 }
 #site-name .iconfont {
   font-size: 20px;
@@ -3592,6 +3593,7 @@ span.tags-punctuation::before {
   display: none;
 }
 #page h1.page-title {
+  display: inline;
   margin: 0.4rem 0 1rem;
 }
 #page {
@@ -5306,25 +5308,24 @@ img.rss-plan-icon {
   font-size: 14px;
   color: var(--sco-secondtext);
 }
-.bber-logo,
-.bber-gotobb {
+i.bber-logo,
+i.bber-gotobb {
   line-height: 25px;
   transition: 0.3s;
   cursor: pointer;
 }
-.bber-logo:hover,
-.bber-gotobb:hover {
+i.bber-logo:hover,
+i.bber-gotobb:hover {
   opacity: 0.8;
   color: var(--sco-theme);
 }
-.bber-logo {
+i.bber-logo {
+  font-size: 0.8rem;
   margin-right: 1rem;
 }
-.bber-gotobb {
-  margin-left: 1rem;
-}
 i.bber-gotobb {
-  font-size: 16px;
+  font-size: 1rem;
+  margin-left: 1rem;
 }
 #bber {
   margin-top: 1rem;
@@ -5476,7 +5477,7 @@ i.bber-gotobb {
   margin: 0.5rem 0;
 }
 #bber .bber-content-img {
-  height: 100px;
+  flex-direction: column;
   margin: 0.2rem auto 0.3rem 0;
   border-radius: 12px;
   overflow: hidden;
@@ -5485,10 +5486,11 @@ i.bber-gotobb {
 }
 #bber .bber-content-img img {
   object-fit: cover;
-  max-height: 100%;
   border-radius: 12px;
   min-height: 100px;
-  height: 100px;
+  height: 100%;
+  max-height: 200px;
+  margin-bottom: 10px;
 }
 #bber .bber-content .datacont {
   order: 0;
@@ -5524,7 +5526,7 @@ i.bber-gotobb {
   align-items: flex-start;
   background: var(--sco-card-bg);
   box-shadow: var(--sco-shadow-border);
-  margin-right: 2.15%;
+  margin-right: 2%;
 }
 @media screen and (max-width: 1300px) {
   #bber .timeline ul li.item {
@@ -5577,6 +5579,7 @@ i.bber-gotobb {
   display: flex;
   justify-content: center;
   margin-top: 1rem;
+  color: var(--sco-secondtext);
 }
 #bber-talk {
   width: 100%;
@@ -6425,6 +6428,10 @@ span.tags-punctuation {
   display: flex;
   flex-direction: column;
 }
+.author-content-item.maxim .maxim-title span:first-child {
+  opacity: 0.6;
+  margin-bottom: 8px;
+}
 .author-content-item.maxim .title1 {
   opacity: 0.8;
   font-size: 0.6rem;
@@ -6454,6 +6461,10 @@ span.tags-punctuation {
 .author-content-item.buff .buff-title {
   display: flex;
   flex-direction: column;
+}
+.author-content-item.buff .buff-title span:first-child {
+  opacity: 0.6;
+  margin-bottom: 8px;
 }
 .author-content-item.buff .title1 {
   opacity: 0.8;
@@ -11439,18 +11450,18 @@ figure.highlight .tag .attr {
   flex-wrap: wrap;
 }
 #console .console-card.tags .card-tag-cloud a {
-  color: var(--sco-fontcolor) !important;
+  color: var(--sco-fontcolor);
   margin: 6px 4px;
   padding: 2px 8px;
   border-radius: 8px;
   background: var(--sco-card-bg);
   border: var(--style-border);
-  font-size: 14px !important;
+  font-size: 14px;
   font-weight: 700;
 }
 #console .console-card.tags .card-tag-cloud a:hover {
   background: var(--sco-main);
-  color: var(--sco-white) !important;
+  color: var(--sco-white);
 }
 #console .console-card.tags .card-tag-cloud a sup {
   opacity: 0.6;
@@ -11520,6 +11531,27 @@ figure.highlight .tag .attr {
   background: var(--sco-main);
   color: var(--sco-white);
   cursor: pointer;
+}
+#console .console-card.history .card-archive-list .card-archive-list-link .card-archive-list-date {
+  font-size: 14px;
+  opacity: 0.6;
+}
+#console .console-card.history .card-archive-list .card-archive-list-link .card-archive-list-count-group {
+  display: flex;
+  flex-direction: row;
+}
+#console .console-card.history .card-archive-list .card-archive-list-link .card-archive-list-count-group .card-archive-list-count {
+  width: auto;
+  text-align: left;
+  font-size: 1.1rem;
+  line-height: 0.9;
+  font-weight: 700;
+}
+#console .console-card.history .card-archive-list .card-archive-list-link .card-archive-list-count-group .card-archive-list-count-unit {
+  width: auto;
+  text-align: left;
+  font-size: 14px;
+  font-weight: 700;
 }
 #console #card-newest-comments {
   height: 100%;
