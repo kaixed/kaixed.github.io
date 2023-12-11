@@ -2840,6 +2840,19 @@ a.console_switchbutton {
   margin-top: 20px;
   user-select: none;
 }
+#recent-posts > .recent-post-item > .recent-post-info .recent-post-info-top-tips > .sticky-warp {
+  display: flex;
+  color: #ff7242;
+  position: relative;
+  margin-right: 8px;
+  justify-content: center;
+  align-items: center;
+  font-size: 0.5rem;
+}
+#recent-posts > .recent-post-item > .recent-post-info .recent-post-info-top-tips > .sticky-warp i {
+  font-size: 0.5rem;
+  margin-right: 3px;
+}
 #recent-posts > .recent-post-item > .recent-post-info.no-cover {
   width: 100%;
 }
@@ -5479,18 +5492,24 @@ i.bber-gotobb {
 #bber .bber-content-img {
   flex-direction: column;
   margin: 0.2rem auto 0.3rem 0;
+  margin: 0.2rem auto 0.3rem 0;
+  height: 100px;
+  margin: auto;
+  margin-top: 0.2rem;
+  margin-bottom: 0.3rem;
+  margin-left: 0;
   border-radius: 12px;
   overflow: hidden;
   display: flex;
   position: relative;
 }
 #bber .bber-content-img img {
+  margin-right: 10px;
   object-fit: cover;
+  max-height: 100%;
   border-radius: 12px;
   min-height: 100px;
-  height: 100%;
-  max-height: 200px;
-  margin-bottom: 10px;
+  height: 100px;
 }
 #bber .bber-content .datacont {
   order: 0;
@@ -7880,7 +7899,7 @@ padding-bottom
   border-radius: 12px;
 }
 #footer #sco-footer .footer-item:hover {
-  color: var(--sco-theme);
+  color: var(--sco-main);
   background: var(--sco-main-op-light);
 }
 [data-theme=dark] #footer #sco-footer .footer-item:hover {
@@ -7926,7 +7945,7 @@ padding-bottom
   background: var(--sco-secondbg);
   display: flex;
   overflow: hidden;
-  z-index: 1002;
+  z-index: 1;
   transition: 0.3s;
   border-top: var(--style-border-always);
 }
