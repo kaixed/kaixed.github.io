@@ -4282,7 +4282,7 @@ a.categoryButton i {
 div#banners {
   display: none;
 }
-.topGroup .todayCard {
+.todayCard {
   display: none;
 }
 @media screen and (min-width: 1200px) {
@@ -4320,6 +4320,7 @@ div#banners {
     height: 100%;
     top: 0;
     left: 0;
+    box-shadow: 0 -109px 133px -9px  inset;
   }
   .topGroup .todayCard.hide {
     opacity: 0;
@@ -5578,6 +5579,9 @@ i.bber-gotobb {
   color: var(--sco-theme);
   transition: 0.3s;
 }
+#tag {
+  padding: 3rem 2rem 1rem 2rem;
+}
 #tag #tag-page-tags {
   display: flex;
   flex-direction: row;
@@ -5592,6 +5596,7 @@ i.bber-gotobb {
   top: 0;
   max-height: 64px;
   overflow: hidden;
+  background: var(--sco-card-bg);
   backdrop-filter: saturate(180%) blur(20px);
   transition: 0.1s ease-out;
 }
@@ -5632,7 +5637,7 @@ i.bber-gotobb {
   }
 }
 span.tags-punctuation {
-  margin-right: 5px;
+  margin-right: 2px;
   font-size: 0.7rem;
   font-weight: 700;
   display: flex;
@@ -6613,7 +6618,7 @@ span.tags-punctuation {
   display: flex;
   justify-content: space-between;
   flex-direction: column;
-  width: 50%;
+  width: calc(100% / 3);
   margin-bottom: 0.5rem;
 }
 #statistic div span:first-child {
@@ -8276,23 +8281,15 @@ div#post-comment {
   color: var(--sco-main);
 }
 #post-comment .comment-tips {
-  background-color: rgba(103,194,58,0.9);
+  background-color: rgba(103,194,58,0.13);
   border: var(--style-border-always);
   border-color: var(--sco-green);
-  color: var(--sco-white);
-  border-radius: 8px 8px 0 0;
+  color: var(--sco-green);
+  border-radius: 8px;
   padding: 8px 12px;
   margin-top: 0.5rem;
   display: none;
   width: 100%;
-  position: absolute;
-  top: 50px;
-  z-index: 1000;
-  opacity: 1;
-  transition: 0.3s;
-}
-#post-comment .comment-tips:hover {
-  opacity: 0;
 }
 #post-comment .comment-tips.show {
   display: flex;
@@ -8578,6 +8575,7 @@ div#post-comment {
   color: var(--sco-secondtext);
 }
 .tk-meta-input .el-input .el-input-group__prepend {
+  border-radius: 12px 0 0 12px;
   -webkit-user-select: none;
 }
 @media screen and (max-width: 768px) {
@@ -8608,10 +8606,13 @@ img.tk-avatar-img {
 .el-input--small .el-input__inner {
   padding: 8px;
 }
+.el-input--small .el-input__inner,
+.el-input--small .el-textarea__inner {
+  border-radius: 12px;
+}
 .el-input.el-input--small.el-input-group.el-input-group--prepend {
   border-radius: 12px;
   background: var(--sco-secondbg);
-  border: var(--style-border-always);
 }
 .el-input.el-input--small.el-input-group.el-input-group--prepend:nth-child(1):before {
   content: '输入QQ号会自动获取昵称和头像';
@@ -8665,12 +8666,13 @@ img.tk-avatar-img {
   border: 1px solid var(--sco-card-border) !important;
   color: var(--sco-fontcolor) !important;
   padding-left: 8px;
+  border-radius: 12px;
 }
 .page .el-input__inner {
   background: var(--sco-card-bg) !important;
 }
 .el-input__inner:focus {
-  border: 1px solid var(--sco-main) !important;
+  border: none;
 }
 .el-textarea__inner {
   background: var(--sco-secondbg) !important;

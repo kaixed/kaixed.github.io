@@ -1,33 +1,3 @@
-const adjustMenu = (change = false) => {
-    const $blogName = document.getElementById('site-name')
-    let blogNameWidth = $blogName && $blogName.offsetWidth
-    const $menusEle = document.querySelector('#menus .menus_items')
-    let menusWidth = $menusEle && $menusEle.offsetWidth
-    const $searchEle = document.querySelector('#search-button')
-    let searchWidth = $searchEle && $searchEle.offsetWidth
-    if (change) {
-        blogNameWidth = $blogName && $blogName.offsetWidth
-        menusWidth = $menusEle && $menusEle.offsetWidth
-        searchWidth = $searchEle && $searchEle.offsetWidth
-    }
-    const $nav = document.getElementById('nav')
-    let t
-    if (window.innerWidth < 768) t = true
-    else t = blogNameWidth + menusWidth + searchWidth > $nav?.offsetWidth - 120
-
-    if (t) {
-        $nav?.classList.add('hide-menu')
-    } else {
-        $nav?.classList.remove('hide-menu')
-    }
-}
-
-// 初始化header
-const initAdjust = () => {
-    adjustMenu()
-    document.getElementById('nav')?.classList.add('show')
-}
-
 /**
  * side menu
  */
@@ -80,15 +50,16 @@ const scrollFn = function () {
         const isDown = scrollDirection(currentTop);
 
         if (currentTop > 0) {
-            $header.classList.add('nav-fixed');
             if (isDown) {
                 if ($header.classList.contains('nav-visible')) $header.classList.remove('nav-visible');
             } else {
                 if (!$header.classList.contains('nav-visible')) $header.classList.add('nav-visible');
             }
+            $header.classList.add('nav-fixed');
         } else {
             $header.classList.remove('nav-fixed', 'nav-visible');
         }
+
         percent();
     }, 200));
 
@@ -116,7 +87,7 @@ const percent = () => {
     } else {
         document.querySelector("#nav-totop").classList.remove("long")
         if (scrollPercent >= 0) {
-            percentElement.innerHTML = scrollPercent
+            percentElement.innerHTML = scrollPercent + ""
         }
     }
 
@@ -452,14 +423,17 @@ let sco = {
      * @param txt
      */
     toTalk: function (txt) {
-        const input = document.querySelector('.el-textarea__inner');
-        const evt = new Event('input', {bubbles: true, cancelable: true});
-        const inputValue = txt.replace(/\n/g, '\n> ');
-        input.value = '> ' + inputValue + '\n\n';
-        input.dispatchEvent(evt);
-        utils.scrollToDest(utils.getEleTop(document.getElementById('post-comment')), 300)
-        input.focus();
-        input.setSelectionRange(-1, -1);
+        const inputs = ["#wl-edit", ".el-textarea__inner"]
+        for (let i = 0; i < inputs.length; i++) {
+            let el = document.querySelector(inputs[i])
+            if (el != null) {
+                el.dispatchEvent(new Event('input', {bubble: true, cancelable: true}))
+                el.value = '> ' + txt.replace(/\n/g, '\n> ') + '\n\n'
+                utils.scrollToDest(utils.getEleTop(document.getElementById('post-comment')), 300)
+                el.focus()
+                el.setSelectionRange(-1, -1)
+            }
+        }
         const commentTips = document.querySelector("#comment-tips");
         if (commentTips) {
             commentTips.classList.add("show");
@@ -501,42 +475,39 @@ let sco = {
     /**
      * 下载图片并添加水印
      */
-    downloadImage: async function (url, filename) {
-        rm.hideRightMenu();
+    downloadImage: function (imageUrl, filename = 'photo') {
         if (rm.downloadimging) {
             utils.snackbarShow("有正在进行中的下载，请稍后再试");
             return;
         }
-        try {
-            rm.downloadimging = true;
-            utils.snackbarShow("正在下载中，请稍后", false, 10000);
-            await new Promise(resolve => setTimeout(resolve, 10000));
-            const img = new Image();
-            img.setAttribute("crossOrigin", "anonymous");
-            img.onload = function () {
-                const canvas = document.createElement("canvas");
-                const ctx = canvas.getContext("2d");
-                canvas.width = img.width;
-                canvas.height = img.height;
-                ctx.drawImage(img, 0, 0, img.width, img.height);
-                ctx.font = "30px Arial";
-                ctx.fillText(window.location.href, 10, img.height - 10);
-                const dataUrl = canvas.toDataURL("image/png");
-                const link = document.createElement("a");
-                const event = new MouseEvent("click");
-                link.download = filename || "photo";
-                link.href = dataUrl;
-                link.dispatchEvent(event);
-                utils.snackbarShow("图片已添加盲水印，请遵守版权协议");
-                rm.downloadimging = false;
-            };
-            img.src = url;
-        } catch (error) {
-            console.error(error);
-            utils.snackbarShow("下载图片时出错");
+
+        rm.hideRightMenu();
+        rm.downloadimging = true;
+        utils.snackbarShow("正在下载中，请稍后", false, 10000);
+
+        let img = new Image();
+        img.setAttribute("crossOrigin", "anonymous");
+        img.onload = function () {
+            let canvas = document.createElement("canvas");
+            canvas.width = img.width;
+            canvas.height = img.height;
+            let ctx = canvas.getContext("2d");
+            ctx.drawImage(img, 0, 0, img.width, img.height);
+
+            let dataUrl = canvas.toDataURL("image/png");
+            let link = document.createElement("a");
+            link.download = filename;
+            link.href = dataUrl;
+
+            let clickEvent = new MouseEvent("click");
+            link.dispatchEvent(clickEvent);
+
+            utils.snackbarShow("图片已添加盲水印，请遵守版权协议");
             rm.downloadimging = false;
-        }
+        };
+        img.src = imageUrl;
     },
+
     /**
      * 音乐播放暂停
      */
@@ -583,27 +554,6 @@ let sco = {
      */
     scrollToComment: function () {
         utils.scrollToDest(utils.getEleTop(document.getElementById('post-comment')), 300)
-    },
-    /**
-     * 一些日子灰色页面
-     */
-    setFest: function () {
-        const date = new Date();
-        const currentDate = `${date.getMonth() + 1}.${date.getDate()}`;
-
-        const specialDates = ['1.8', '9.9', '7.7', '9.18', '12.13'];
-
-        if (specialDates.includes(currentDate)) {
-            const css = `
-        html {
-            filter: grayscale(100%);
-        }
-        `;
-
-            const styleElement = document.createElement('style');
-            styleElement.textContent = css;
-            document.head.appendChild(styleElement);
-        }
     },
     /**
      * 个人信息顶部文字更新
@@ -788,6 +738,35 @@ let sco = {
         }
     },
     /**
+     * 初始化Header
+     * @param change
+     */
+    initAdjust: function (change = false) {
+        const $blogName = document.getElementById('site-name')
+        let blogNameWidth = $blogName && $blogName.offsetWidth
+        const $menusEle = document.querySelector('#menus .menus_items')
+        let menusWidth = $menusEle && $menusEle.offsetWidth
+        const $searchEle = document.querySelector('#search-button')
+        let searchWidth = $searchEle && $searchEle.offsetWidth
+        if (change) {
+            blogNameWidth = $blogName && $blogName.offsetWidth
+            menusWidth = $menusEle && $menusEle.offsetWidth
+            searchWidth = $searchEle && $searchEle.offsetWidth
+        }
+        const $nav = document.getElementById('nav')
+        let t
+        if (window.innerWidth < 768) t = true
+        else t = blogNameWidth + menusWidth + searchWidth > $nav?.offsetWidth - 120
+
+        if (t) {
+            $nav?.classList.add('hide-menu')
+        } else {
+            $nav?.classList.remove('hide-menu')
+        }
+
+        document.getElementById('nav')?.classList.add('show')
+    },
+    /**
      * 首页分页跳转
      */
     toPage: function () {
@@ -809,6 +788,25 @@ let sco = {
             document.getElementById("toPageButton").href = targetPageUrl;
         }
     },
+    addRandomCommentInfo: function () {
+        const e = `${GLOBAL_CONFIG.comment.randomInfoStart[Math.floor(Math.random() * GLOBAL_CONFIG.comment.randomInfoStart.length)]}${GLOBAL_CONFIG.comment.randomInfoEnd[Math.floor(Math.random() * GLOBAL_CONFIG.comment.randomInfoEnd.length)]}`;
+
+        const nameSelectors = ["#author", "input[name='comname']", "#inpName", "input[name='author']", "#ds-dialog-name", "#name", "input[name='nick']", "#comment_author"];
+        const emailSelectors = ["#mail", "#email", "input[name='commail']", "#inpEmail", "input[name='email']", "#ds-dialog-email", "input[name='mail']", "#comment_email"];
+
+        const nameElements = nameSelectors.map(selector => document.querySelector(selector)).filter(Boolean);
+        const emailElements = emailSelectors.map(selector => document.querySelector(selector)).filter(Boolean);
+
+        nameElements.forEach(element => {
+            element.value = e;
+            element.dispatchEvent(new Event("input"));
+        });
+
+        emailElements.forEach(element => {
+            element.value = "donotreply@examp.com";
+            element.dispatchEvent(new Event("input"));
+        });
+    }
 }
 
 /*
@@ -908,13 +906,14 @@ class tabs {
         document.querySelectorAll('#article-container .tabs .tab-to-top').forEach(function (item) {
             item.addEventListener('click', function () {
                 utils.scrollToDest(utils.getEleTop(item.parentElement.parentElement.parentNode), 300)
+
             })
         })
     }
 }
 
 window.refreshFn = () => {
-    initAdjust()
+    sco.initAdjust()
     scrollFn()
     sidebarFn()
     changeTimeFormat()
@@ -922,7 +921,6 @@ window.refreshFn = () => {
     sco.addRuntime()
     sco.hideCookie()
     sco.addPhotoFigcaption()
-    sco.setFest()
     sco.setTimeState()
     sco.tagPageActive()
     sco.categoriesBarActive()
@@ -939,15 +937,14 @@ window.refreshFn = () => {
     GLOBAL_CONFIG.covercolor && coverColor()
     sco.initConsoleState()
     GLOBAL_CONFIG.comment.commentBarrage && PAGE_CONFIG.comment && initializeCommentBarrage()
+    document.body.setAttribute('data-type', PAGE_CONFIG.page)
+    PAGE_CONFIG.page === "music" && scoMusic.init()
+    scoMusic && document.removeEventListener('keydown', scoMusic.setKeydown)
 }
 
 sco.initTheme()
 
 document.addEventListener('DOMContentLoaded', function () {
-    window.refreshFn()
-})
-
-document.addEventListener('pjax:complete', () => {
     window.refreshFn()
 })
 
