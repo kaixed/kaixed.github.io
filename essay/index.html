@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="utf-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1"><title>即刻短文 | 肤浅Leo</title><noscript>开启JavaScript才能访问本站哦</noscript><link rel="icon" href="/img/favicon.ico"><meta name="description" content="分享生活的小确幸"><!-- index.css--><link rel="stylesheet" href="/css/index.css"><!-- inject head--><meta name="baidu-site-verification" content="codeva-Gaq7x0tEh8"><script src="https://cdn.bootcdn.net/ajax/libs/pace/1.2.4/pace.min.js"></script><!-- pwa--><link rel="stylesheet" href="https://cdn3.codesign.qq.com/icons/7pOrz0WXB5ZWJPX/latest/iconfont.css"><link rel="stylesheet" href="https://cdn3.codesign.qq.com/icons/1Yyg5ZpdqPZ2lKv/latest/iconfont.css"><link rel="stylesheet" href="/lib/snackbar.min.css"><!-- comment--><script src="https://cdn.staticfile.org/twikoo/1.6.26/twikoo.all.min.js"></script><!-- search--><script src="https://cdn.bootcdn.net/ajax/libs/instantsearch.js/4.9.1/instantsearch.production.min.js"></script><script src="https://cdn.bootcdn.net/ajax/libs/algoliasearch/4.9.3/algoliasearch-lite.umd.min.js"></script><!-- aplayer--><!-- swiper--><link rel="stylesheet" href="https://cdn.bootcdn.net/ajax/libs/Swiper/9.2.4/swiper-bundle.min.css"><!-- custom inject--><script charset="UTF-8" id="LA_COLLECT" src="//sdk.51.la/js-sdk-pro.min.js"></script><script>LA.init({id:"KGb5393knuMKb8DC",ck:"KGb5393knuMKb8DC"})</script><!-- post-ai--><!-- echarts--><!-- music--><script>(win => {
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="utf-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1"><title>即刻短文 | 肤浅Leo</title><noscript>开启JavaScript才能访问本站哦</noscript><link rel="icon" href="/img/favicon.ico"><meta name="description" content="分享生活的小确幸"><!-- index.css--><link rel="stylesheet" href="/css/index.css"><!-- inject head--><meta name="baidu-site-verification" content="codeva-Gaq7x0tEh8"><script src="https://cdn.bootcdn.net/ajax/libs/pace/1.2.4/pace.min.js"></script><!-- pwa--><link rel="stylesheet" href="https://cdn3.codesign.qq.com/icons/7pOrz0WXB5ZWJPX/latest/iconfont.css"><link rel="stylesheet" href="https://cdn3.codesign.qq.com/icons/1Yyg5ZpdqPZ2lKv/latest/iconfont.css"><link rel="stylesheet" href="/lib/snackbar.min.css"><!-- comment--><script src="https://cdn.staticfile.org/twikoo/1.6.26/twikoo.all.min.js"></script><!-- search--><script src="https://cdn.bootcdn.net/ajax/libs/instantsearch.js/4.9.1/instantsearch.production.min.js"></script><script src="https://cdn.bootcdn.net/ajax/libs/algoliasearch/4.9.3/algoliasearch-lite.umd.min.js"></script><!-- aplayer--><!-- swiper--><link rel="stylesheet" href="https://cdn.bootcdn.net/ajax/libs/Swiper/9.2.4/swiper-bundle.min.css"><!-- custom inject--><script charset="UTF-8" id="LA_COLLECT" src="//sdk.51.la/js-sdk-pro.min.js"></script><script>LA.init({id:"KGb5393knuMKb8DC",ck:"KGb5393knuMKb8DC"})</script><!-- echarts--><!-- music--><script>(win => {
         win.saveToLocal = {
             set: function setWithExpiry(key, value, ttl) {
                 if (ttl === 0)
@@ -110,6 +110,12 @@
     },
     rightside: {
         enable: true
+    },
+    ai: {
+        enable: false,
+        key: '',
+        talk: '我是王卓Sco开发的摘要生成助理ScoGPT，ScoGPT在静态部署时进行摘要的撰写，并且在访客访问时通过ScoCorrection转译后的文本摘要实现工具。我在这里只负责已经生成的摘要显示，你无法与我直接沟通，但我可以回答一些预设的问题。你也可以使用Tianli开发的TianliGPT来更简单地实现和我类似的效果。',
+        randomPost: false,
     }
 }</script><meta name="generator" content="Hexo 7.0.0"></head><body id="body" data-type="says"><!-- loading--><div id="loading-box" onclick="preloader.endLoading();" style="zoom:1"><div class="loading-bg"><img class="loading-img" src="https://cdn.kaixed.com/imgs/avatar.png" alt="loading image"></div></div><script>const preloader = {
     endLoading: () => {
@@ -195,7 +201,7 @@ document.addEventListener('pjax:complete', () => {
     if (document.getElementById('waterfall')) {
         sco.reflashEssayWaterFall();
     }
-}), 500);</script><script async src="https://cdn.bootcdn.net/ajax/libs/busuanzi/2.3.0/bsz.pure.mini.min.js"></script><script id="config-diff">var PAGE_CONFIG = {
+}), 500);</script><script id="config-diff">var PAGE_CONFIG = {
     is_post: false,
     is_page: true,
     is_home: false,
@@ -258,4 +264,4 @@ document.addEventListener('pjax:error', (e) => {
     if (e.request.status === 404) {
         pjax.loadUrl('/404.html')
     }
-})</script><!-- inject custom body--><!-- search--><div id="algolia-search"><div class="search-dialog"><div class="search-dialog__title" id="algolia-search-title">搜索</div><div id="algolia-input-panel"><div id="algolia-search-input"></div></div><div id="search-results"><div id="algolia-hits"></div></div><div id="algolia-tips"><div id="algolia-pagination"></div><div id="algolia-stats"></div><div id="algolia-poweredBy"></div></div><span class="search-close-button"><i class="scoicon sco-close-fill"></i></span></div><div id="search-mask"></div></div><script src="/js/extend/search/algolia-search.js"></script><!-- music--><div class="needEndHide" id="nav-music" onclick="sco.musicToggle()"><div id="nav-music-hoverTips">音乐已暂停</div><meting-js id="8407304077" server="netease" type="playlist" mutex="true" preload="none" data-lrctype="0" order="random" theme="var(--sco-main)"></meting-js></div></body></html><script>const posts=["p/315e48d1.html","p/2b274a74.html","p/abc99215.html"];function toRandomPost(){ pjax.loadUrl('/'+posts[Math.floor(Math.random()*posts.length)]); };</script>
+})</script><!-- post-ai)--><!-- inject custom body--><!-- search--><div id="algolia-search"><div class="search-dialog"><div class="search-dialog__title" id="algolia-search-title">搜索</div><div id="algolia-input-panel"><div id="algolia-search-input"></div></div><div id="search-results"><div id="algolia-hits"></div></div><div id="algolia-tips"><div id="algolia-pagination"></div><div id="algolia-stats"></div><div id="algolia-poweredBy"></div></div><span class="search-close-button"><i class="scoicon sco-close-fill"></i></span></div><div id="search-mask"></div></div><script src="/js/extend/search/algolia-search.js"></script><!-- music--><div class="needEndHide" id="nav-music" onclick="sco.musicToggle()"><div id="nav-music-hoverTips">音乐已暂停</div><meting-js id="8407304077" server="netease" type="playlist" mutex="true" preload="none" data-lrctype="0" order="random" theme="var(--sco-main)"></meting-js></div></body></html><script>const posts=["p/315e48d1.html","p/2b274a74.html","p/abc99215.html"];function toRandomPost(){ pjax.loadUrl('/'+posts[Math.floor(Math.random()*posts.length)]); };</script>

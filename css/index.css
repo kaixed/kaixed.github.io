@@ -768,6 +768,50 @@
         }
     }
 }
+
+@keyframes blinking-cursor {
+    0% {
+        transform: scale(.6)
+    }
+
+    25% {
+        transform: scale(1)
+    }
+
+    50% {
+        transform: scale(.6)
+    }
+
+    75% {
+        transform: scale(1)
+    }
+
+    100% {
+        transform: scale(.6)
+    }
+}
+
+@keyframes AILoading {
+    0% {
+        opacity: 1
+    }
+
+    25% {
+        opacity: .3
+    }
+
+    50% {
+        opacity: 1
+    }
+
+    75% {
+        opacity: .3
+    }
+
+    100% {
+        opacity: 1
+    }
+}
 :root {
   --sco-white: #fff;
   --sco-white-op: rgba(255,255,255,0.2);
@@ -6618,7 +6662,7 @@ span.tags-punctuation {
   display: flex;
   justify-content: space-between;
   flex-direction: column;
-  width: calc(100% / 3);
+  width: 50%;
   margin-bottom: 0.5rem;
 }
 #statistic div span:first-child {
@@ -7208,7 +7252,7 @@ padding-bottom
   }
 }
 #aside-content .card-toc {
-  padding: 0.5rem 0.5rem !important;
+  padding: 0.5rem 0.5rem;
 }
 #aside-content .card-toc:hover {
   box-shadow: var(--sco-shadow-border);
@@ -7238,19 +7282,39 @@ padding-bottom
 }
 @media screen and (min-width: 901px) {
   #aside-content #card-toc {
-    right: 0 !important;
+    right: 0;
   }
 }
 #aside-content #card-toc .toc-content {
   overflow-y: auto;
   max-height: calc(100vh - 300px);
 }
+#aside-content #card-toc .toc-content * > .toc-item > .toc-child {
+  margin-left: 10px;
+  transition: display 0.3s ease-in-out 0s;
+  padding-left: 10px;
+}
 #aside-content #card-toc .toc-content ol {
   margin: 0;
-  padding: 0;
+  padding-left: 0.4rem;
 }
 #aside-content #card-toc .toc-content olul {
   list-style: none;
+}
+#aside-content #card-toc .toc-content > ol {
+  padding-left: 0;
+}
+#aside-content #card-toc .toc-content .toc-child {
+  display: none;
+}
+#aside-content #card-toc .toc-content .toc-child .toc-child {
+  display: none;
+}
+#aside-content #card-toc .toc-content .toc-child .toc-child.active {
+  display: block;
+}
+#aside-content #card-toc .toc-content .toc-item.active > .toc-child {
+  display: block;
 }
 #aside-content #card-toc .toc-content:hover .toc-link:not(.active) span,
 #aside-content #card-toc .toc-content .toc-content .toc-link:not(.active) span {
