@@ -206,12 +206,15 @@ class toc {
             if (top === 0) {
                 return false
             }
+
             let currentIndex = ''
+
             list.forEach(function (ele, index) {
                 if (top > utils.getEleTop(ele) - 80) {
                     currentIndex = index
                 }
             })
+
             if (detectItem === currentIndex) return
             detectItem = currentIndex
             document.querySelectorAll('.toc .active').forEach((i) => {
@@ -231,6 +234,7 @@ class toc {
             const currentTop = window.scrollY || document.documentElement.scrollTop
             findHeadPosition(currentTop)
         }, 100)
+
         window.addEventListener('scroll', tocScrollFn)
     }
 }
@@ -454,7 +458,7 @@ let sco = {
         }
     },
     /**
-     * 图片添加水印
+     * 图片添加底部展示信息
      */
     addPhotoFigcaption: function () {
         let images = document.querySelectorAll('#article-container img');
@@ -938,7 +942,9 @@ window.refreshFn = () => {
     GLOBAL_CONFIG.comment.commentBarrage && PAGE_CONFIG.comment && initializeCommentBarrage()
     document.body.setAttribute('data-type', PAGE_CONFIG.page)
     PAGE_CONFIG.page === "music" && scoMusic.init()
-    scoMusic && document.removeEventListener('keydown', scoMusic.setKeydown)
+    if (!document.querySelector('#Music-page')) {
+        document.removeEventListener('keydown', scoMusic.setKeydown)
+    }
     GLOBAL_CONFIG.ai.enable && PAGE_CONFIG.page === "post" && ScoAI.init()
 }
 

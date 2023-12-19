@@ -42,6 +42,7 @@ function coverColor() {
     }
 }
 
+
 function colorHex(colorString) {
     const hexRegex = /^#([0-9a-fA-f]{3}|[0-9a-fA-f]{6})$/;
     let color = colorString;
@@ -64,6 +65,7 @@ function colorHex(colorString) {
     }
     return color;
 }
+
 
 
 function colorRgb(str) {
@@ -126,7 +128,6 @@ function getContrastYIQ(hexcolor) {
         return "dark";
     }
 }
-
 
 function initThemeColor() {
     const currentTop = window.scrollY || document.documentElement.scrollTop;
