@@ -192,6 +192,7 @@ class toc {
         const $tocContent = document.getElementById('toc-content')
         const list = $article.querySelectorAll('h1,h2,h3,h4,h5,h6')
         let detectItem = ''
+
         function autoScroll(el) {
             const activePosition = el.getBoundingClientRect().top
             const sidebarScrollTop = $tocContent.scrollTop
@@ -202,6 +203,7 @@ class toc {
                 $tocContent.scrollTop = sidebarScrollTop - 150
             }
         }
+
         function findHeadPosition(top) {
             if (top === 0) {
                 return false
@@ -230,6 +232,7 @@ class toc {
                 }
             }
         }
+
         window.tocScrollFn = utils.throttle(function () {
             const currentTop = window.scrollY || document.documentElement.scrollTop
             findHeadPosition(currentTop)
@@ -942,9 +945,10 @@ window.refreshFn = () => {
     GLOBAL_CONFIG.comment.commentBarrage && PAGE_CONFIG.comment && initializeCommentBarrage()
     document.body.setAttribute('data-type', PAGE_CONFIG.page)
     PAGE_CONFIG.page === "music" && scoMusic.init()
-    if (!document.querySelector('#Music-page')) {
-        document.removeEventListener('keydown', scoMusic.setKeydown)
-    }
+
+    // if (!document.querySelector('#Music-page')) {
+    //     document.removeEventListener('keydown', scoMusic.setKeydown)
+    // }
     GLOBAL_CONFIG.ai.enable && PAGE_CONFIG.page === "post" && ScoAI.init()
 }
 

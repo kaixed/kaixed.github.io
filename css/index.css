@@ -4637,6 +4637,10 @@ span.tagsPageCount {
   width: 100%;
   position: relative;
 }
+#body-wrap.error #error-wrap .button--animated {
+  border-radius: 8px !important;
+  transition: 0.3s;
+}
 #body-wrap.error #error-wrap .error-content {
   display: flex;
   flex-direction: row;
