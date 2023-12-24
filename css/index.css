@@ -2792,6 +2792,12 @@ a.console_switchbutton {
   position: relative;
   overflow: hidden;
 }
+@media screen and (max-width: 768px) {
+  .layout > div:first-child:not(.recent-posts) {
+    padding: 0 1rem;
+    background: var(--sco-background);
+  }
+}
 span.tags-punctuation::before {
   content: "\e071";
   font-family: scoicon, serif !important;
@@ -4851,12 +4857,15 @@ a.bber-reply {
   background: var(--sco-card-bg);
   margin: 0.5em 0.5em;
   border-radius: 12px;
-  -webkit-backface-visibility: hidden;
-  -webkit-transform-style: preserve-3d;
   border: var(--style-border-always);
   box-shadow: var(--sco-shadow-border);
   align-items: center;
   transition: all 0.3s ease 0s;
+}
+@media screen and (max-width: 768px) {
+  #page .category-lists .tag-cloud-list a {
+    zoom: 0.85;
+  }
 }
 #page .category-lists .tag-cloud-list a:hover {
   transform: scale(1.1);
@@ -5713,12 +5722,14 @@ i.bber-gotobb {
   color: var(--sco-theme);
   transition: 0.3s;
 }
-#tag {
-  padding: 3rem 2rem 1rem 2rem;
-}
 @media screen and (min-width: 1300px) {
   #tag {
     padding: 4rem 2rem 1rem 2rem;
+  }
+}
+@media screen and (max-width: 768px) {
+  #tag {
+    padding: 0 1rem;
   }
 }
 #tag #tag-page-tags {
@@ -6784,24 +6795,6 @@ span.tags-punctuation {
   background-size: 100%;
   transition: 1s ease-in-out;
 }
-@media screen and (max-width: 768px) {
-  #about-page .author-content-item.map {
-    margin-bottom: 0;
-  }
-}
-[data-theme=dark] #about-page .author-content-item.map {
-  background: var(--site-about-oneself-map--dark) no-repeat center;
-  background-size: 100%;
-}
-#about-page .author-content-item.map:hover {
-  background-size: 120%;
-  transition: 4s ease-in-out;
-  background-position-x: 0;
-  background-position-y: 36%;
-}
-#about-page .author-content-item.map:hover .map-title {
-  bottom: -100%;
-}
 #about-page .author-content-item.map .map-title {
   position: absolute;
   bottom: 0;
@@ -6823,6 +6816,24 @@ span.tags-punctuation {
 #about-page .author-content-item.map .map-title b {
   color: var(--sco-fontcolor);
 }
+@media screen and (max-width: 768px) {
+  #about-page .author-content-item.map {
+    margin-bottom: 0;
+  }
+}
+[data-theme=dark] #about-page .author-content-item.map {
+  background: var(--site-about-oneself-map--dark) no-repeat center;
+  background-size: 100%;
+}
+#about-page .author-content-item.map:hover {
+  background-size: 120%;
+  transition: 4s ease-in-out;
+  background-position-x: 0;
+  background-position-y: 36%;
+}
+#about-page .author-content-item.map:hover .map-title {
+  bottom: -100%;
+}
 #about-page .author-content-item.selfInfo {
   display: flex;
   min-height: 100px;
@@ -6833,7 +6844,7 @@ span.tags-punctuation {
   height: -webkit-fill-available;
   height: 40%;
 }
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 1300px) {
   #about-page .author-content-item.selfInfo {
     height: 70%;
   }
@@ -6992,11 +7003,6 @@ span.tags-punctuation {
   font-size: 12px;
   color: var(--sco-secondtext);
 }
-@media screen and (max-width: 768px) {
-  .author-content-item .card-content {
-    padding: 1rem;
-  }
-}
 @media screen and (max-width: 1300px) {
   .author-content-item {
     animation: slide-in 0.6s 0s backwards;
@@ -7103,6 +7109,11 @@ span.tags-punctuation {
   flex-direction: column;
   padding: 1rem 2rem;
 }
+@media screen and (max-width: 768px) {
+  .author-content-item .card-content {
+    padding: 1rem;
+  }
+}
 .author-content-item .card-content .author-content-item-title {
   margin-bottom: 0.5rem;
 }
@@ -7135,7 +7146,7 @@ span.tags-punctuation {
   margin-right: 8px;
   font-size: 22px;
 }
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 900px) {
   .author-content-item .card-content .banner-button-group {
     right: 1rem;
     bottom: 1rem;
