@@ -10474,7 +10474,6 @@ button.el-button.tk-cancel.el-button--default.el-button--small {
   top: 10%;
   left: 10%;
   background-color: var(--sco-maskbgdeep);
-  -webkit-backdrop-filter: blur(20px);
   backdrop-filter: blur(20px);
   transform: translateZ(0);
   color: var(--sco-fontcolor);
@@ -10490,31 +10489,33 @@ button.el-button.tk-cancel.el-button--default.el-button--small {
   box-shadow: var(--sco-shadow-theme);
 }
 #rightMenu .rightMenu-group {
-  padding: 0.35rem 0.3rem;
-  transition: 0.3s;
-}
-#rightMenu .rightMenu-line {
-  border-top: 1px dashed var(--sco-theme-op);
+  padding: 0.5rem 0.3rem;
 }
 #rightMenu .rightMenu-group.rightMenu-small {
   display: flex;
   justify-content: space-between;
 }
-#rightMenu .rightMenu-group .rightMenu-item {
-  border-radius: 8px;
-  transition: 0.3s;
-  cursor: pointer;
-}
-#rightMenu .rightMenu-line .rightMenu-item {
-  margin: 0.25rem 0;
-  padding: 0.25rem 0;
+#rightMenu .rightMenu-group.rightMenu-small .rightMenu-item {
+  width: 30px;
+  height: 30px;
+  line-height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 #rightMenu .rightMenu-group.rightMenu-line .rightMenu-item {
   display: flex;
 }
+#rightMenu .rightMenu-group .rightMenu-item {
+  border-radius: 8px;
+  transition: 0.3s;
+  cursor: pointer;
+  margin: 0.25rem 0;
+  padding: 0.25rem 0.5rem;
+}
 #rightMenu .rightMenu-group .rightMenu-item:hover {
   background-color: var(--sco-main);
-  color: var(--sco-white);
+  color: var(--sco-card-bg);
   box-shadow: var(--sco-shadow-main);
 }
 #rightMenu .rightMenu-group .rightMenu-item i {
@@ -10523,20 +10524,13 @@ button.el-button.tk-cancel.el-button--default.el-button--small {
   line-height: 1.5rem;
   width: 1.5rem;
   padding: 0 0.25rem;
-}
-#rightMenu .rightMenu-line .rightMenu-item i {
   margin: 0 0.25rem;
 }
 #rightMenu .rightMenu-group .rightMenu-item span {
   line-height: 1.5rem;
 }
-.rightMenu-small .rightMenu-item {
-  width: 30px;
-  height: 30px;
-  line-height: 30px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+#rightMenu .rightMenu-line {
+  border-top: 1px dashed var(--sco-theme-op);
 }
 #rightmenu-mask {
   position: fixed;
@@ -10831,7 +10825,7 @@ button.el-button.tk-cancel.el-button--default.el-button--small {
 #article-container.post-content h2,
 #article-container.post-content h3,
 #article-container.post-content h4 {
-  padding-top: 1.5rem;
+  padding: 1.5rem 0 1rem;
   line-height: 1.3;
 }
 #article-container.post-content h1 {
@@ -11749,7 +11743,6 @@ figure.highlight .tag .attr {
 }
 .post .post-bg #post-info #post-firstinfo .meta-firstline span.post-meta-categories {
   background-color: var(--sco-white-op);
-  padding: 0 0.5rem;
   border-radius: 8px;
   line-height: 32px;
   height: 32px;
@@ -11767,6 +11760,7 @@ figure.highlight .tag .attr {
   width: 100%;
   height: 100%;
   display: flex;
+  padding: 0 0.5rem;
 }
 .post .post-bg #post-info #post-firstinfo .meta-firstline span.post-meta-categories a.post-meta-categories:hover {
   color: var(--sco-main);
