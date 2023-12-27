@@ -940,16 +940,11 @@ window.refreshFn = () => {
     PAGE_CONFIG.toc && toc.init();
     (PAGE_CONFIG.is_post || PAGE_CONFIG.is_page) && ((GLOBAL_CONFIG.hightlight.enable && hightlight.init()) || tabs.init())
     PAGE_CONFIG.is_home && (showTodayCard() || sco.initbbtalk())
-    GLOBAL_CONFIG.covercolor && coverColor()
+    GLOBAL_CONFIG.covercolor.enable && coverColor()
     sco.initConsoleState()
     GLOBAL_CONFIG.comment.commentBarrage && PAGE_CONFIG.comment && initializeCommentBarrage()
     document.body.setAttribute('data-type', PAGE_CONFIG.page)
     PAGE_CONFIG.page === "music" && scoMusic.init()
-    // Todo: 优化音乐播放器快捷键绑定
-    // if (!document.querySelector('#Music-page')) {
-    //     document.removeEventListener('keydown', scoMusic.setKeydown)
-    // }
-    // 暂时添加一个变量来判断是否在音乐页面
     GLOBAL_CONFIG.music.enable && !document.querySelector('#Music-page') && document.removeEventListener('keydown', scoMusic.setKeydown)
     GLOBAL_CONFIG.ai.enable && PAGE_CONFIG.page === "post" && ScoAI.init()
 }
