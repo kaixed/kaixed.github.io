@@ -192,7 +192,6 @@ class toc {
         const $tocContent = document.getElementById('toc-content')
         const list = $article.querySelectorAll('h1,h2,h3,h4,h5,h6')
         let detectItem = ''
-
         function autoScroll(el) {
             const activePosition = el.getBoundingClientRect().top
             const sidebarScrollTop = $tocContent.scrollTop
@@ -203,7 +202,6 @@ class toc {
                 $tocContent.scrollTop = sidebarScrollTop - 150
             }
         }
-
         function findHeadPosition(top) {
             if (top === 0) {
                 return false
@@ -232,7 +230,6 @@ class toc {
                 }
             }
         }
-
         window.tocScrollFn = utils.throttle(function () {
             const currentTop = window.scrollY || document.documentElement.scrollTop
             findHeadPosition(currentTop)
@@ -433,7 +430,7 @@ let sco = {
         for (let i = 0; i < inputs.length; i++) {
             let el = document.querySelector(inputs[i])
             if (el != null) {
-                el.dispatchEvent(new Event('input', {bubble: true, cancelable: true}))
+                el.dispatchEvent(new Event('input', { bubble: true, cancelable: true }))
                 el.value = '> ' + txt.replace(/\n/g, '\n> ') + '\n\n'
                 utils.scrollToDest(utils.getEleTop(document.getElementById('post-comment')), 300)
                 el.focus()
@@ -571,11 +568,11 @@ let sco = {
             const hours = timeNow.getHours();
             const lang = GLOBAL_CONFIG.lang.sayhello;
             const greetings = [
-                {start: 0, end: 5, text: lang.goodnight},
-                {start: 6, end: 10, text: lang.morning},
-                {start: 11, end: 14, text: lang.noon},
-                {start: 15, end: 18, text: lang.afternoon},
-                {start: 19, end: 24, text: lang.night},
+                { start: 0, end: 5, text: lang.goodnight },
+                { start: 6, end: 10, text: lang.morning },
+                { start: 11, end: 14, text: lang.noon },
+                { start: 15, end: 18, text: lang.afternoon },
+                { start: 19, end: 24, text: lang.night },
             ];
             for (let greeting of greetings) {
                 if (hours >= greeting.start && hours <= greeting.end) {
@@ -821,13 +818,13 @@ let sco = {
 class hightlight {
     static createEle(langEl, item) {
         const fragment = document.createDocumentFragment()
-        const highlightCopyEle = '<i class="scoicon sco-copy-fill"></i>'
+        const highlightCopyEle = GLOBAL_CONFIG.hightlight.copy ? '<i class="scoicon sco-copy-fill"></i>' : '<i></i>'
         const highlightExpandEle = '<i class="scoicon sco-arrow-down expand"></i>'
 
         const hlTools = document.createElement('div')
         hlTools.className = `highlight-tools`
         hlTools.innerHTML = highlightExpandEle + langEl + highlightCopyEle
-        let expand = true
+        let expand = GLOBAL_CONFIG.hightlight.expand
         hlTools.children[0].addEventListener('click', (e) => {
             if (expand) {
                 hlTools.children[0].classList.add('closed')
@@ -864,10 +861,12 @@ class hightlight {
             ele.addEventListener('click', (e) => {
                 $table.setAttribute('style', `height: ${itemHeight}px`)
                 e.target.classList.add('expand-done')
+                e.target.setAttribute('style', 'display:none')
             })
             fragment.appendChild(ele)
         }
         item.insertBefore(fragment, item.firstChild)
+        hlTools.children[0].click()
     }
 
     static init() {
