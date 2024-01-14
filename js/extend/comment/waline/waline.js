@@ -58,3 +58,5 @@ const generateHtml = array => {
     window.pjax && window.pjax.refresh($dom)
     changeTimeFormat()
 }
+
+newestCommentInit()
