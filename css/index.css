@@ -3045,7 +3045,7 @@ span.tags-punctuation::before {
   display: flex;
   flex-wrap: wrap;
   animation: rowup 60s linear infinite;
-  width: 300px;
+  width: 320px;
   margin-left: auto;
 }
 #bannerGroup .tags-group-icon-pair {
@@ -6552,6 +6552,7 @@ div#banners .tags-group-all .tags-group-icon-pair a img {
   padding: 1rem 1.2rem;
   min-height: 320px;
   position: relative;
+  user-select: none;
 }
 #aside-content > .card-widget.card-info:before {
   background: linear-gradient(-25deg, var(--sco-main), var(--sco-main-op-deep), var(--sco-main), var(--sco-main-op-deep));
