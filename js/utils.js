@@ -70,7 +70,7 @@ const utils = {
     snackbarShow: (text, showAction, duration) => {
         const sa = (typeof showAction !== 'undefined') ? showAction : false
         const dur = (typeof duration !== 'undefined') ? duration : 5000
-        document.styleSheets[0].addRule(':root', '--sco-snackbar-time:' + dur + 'ms!important')
+        document.styleSheets[0].addRule(':root', '--efu-snackbar-time:' + dur + 'ms!important')
         Snackbar.show({
             text: text, showAction: sa, duration: dur, pos: 'top-center'
         })
@@ -185,7 +185,7 @@ const utils = {
         const lightbox = GLOBAL_CONFIG.lightbox
 
         if (lightbox === 'mediumZoom' && mediumZoom) {
-            mediumZoom(selector, {background: "var(--sco-card-bg)"});
+            mediumZoom(selector, {background: "var(--efu-card-bg)"});
         }
 
         if (lightbox === 'fancybox') {
@@ -224,5 +224,11 @@ const utils = {
                 window.fancyboxRun = true
             }
         }
+    },
+    changeTimeFormat(){
+        window.Lately && Lately.init({
+            target: 'time',
+            lang: GLOBAL_CONFIG.lang.lately,
+        })
     }
 }

@@ -108,36 +108,6 @@ const showTodayCard = () => {
     }
 }
 
-const changeTimeFormat = () => {
-    const timeElements = Array.from(document.getElementsByTagName("time"));
-    const lang = GLOBAL_CONFIG.lang.time;
-    const currentDate = new Date();
-
-    timeElements.forEach(timeElement => {
-        const datetime = timeElement.getAttribute("datetime");
-        const timeObj = new Date(datetime);
-        const daysDiff = utils.timeDiff(timeObj, currentDate);
-
-        let timeString;
-        if (daysDiff === 0) {
-            timeString = lang.recent;
-        } else if (daysDiff === 1) {
-            timeString = lang.yesterday;
-        } else if (daysDiff === 2) {
-            timeString = lang.berforeyesterday;
-        } else if (daysDiff <= 7) {
-            timeString = `${daysDiff}${lang.daybefore}`;
-        } else {
-            if (timeObj.getFullYear() !== currentDate.getFullYear()) {
-                timeString = `${timeObj.getFullYear()}/${timeObj.getMonth() + 1}/${timeObj.getDate()}`;
-            } else {
-                timeString = `${timeObj.getMonth() + 1}/${timeObj.getDate()}`;
-            }
-        }
-        timeElement.textContent = timeString;
-    });
-}
-
 const initObserver = () => {
     let commentElement = document.getElementById("post-comment");
     let paginationElement = document.getElementById("pagination");
@@ -352,7 +322,7 @@ let sco = {
     },
     addRuntime: function () {
         let el = document.getElementById('runtimeshow')
-        el && GLOBAL_CONFIG.runtime && (el.innerText = utils.timeDiff(new Date(GLOBAL_CONFIG.runtime), new Date()) + GLOBAL_CONFIG.lang.time.runtime)
+        el && GLOBAL_CONFIG.runtime && (el.innerText = utils.timeDiff(new Date(GLOBAL_CONFIG.runtime), new Date()) + GLOBAL_CONFIG.lang.lately.day)
     },
     toTalk: function (txt) {
         const inputs = ["#wl-edit", ".el-textarea__inner"]
@@ -440,10 +410,10 @@ let sco = {
         $console.classList.toggle("on", wleelw_musicPlaying);
         if (wleelw_musicPlaying) {
             $meting.aplayer.play();
-            $toggleButton.innerHTML = `<i class="scoicon sco-pause-fill"></i><span>暂停音乐</span>`;
+            $toggleButton.innerHTML = `<i class="solitude st-pause-fill"></i><span>暂停音乐</span>`;
         } else {
             $meting.aplayer.pause();
-            $toggleButton.innerHTML = `<i class="scoicon sco-play-fill"></i><span>播放音乐</span>`;
+            $toggleButton.innerHTML = `<i class="solitude st-play-fill"></i><span>播放音乐</span>`;
         }
         rm.hideRightMenu();
     },
@@ -691,8 +661,8 @@ let sco = {
 class hightlight {
     static createEle(langEl, item) {
         const fragment = document.createDocumentFragment()
-        const highlightCopyEle = GLOBAL_CONFIG.hightlight.copy ? '<i class="scoicon sco-copy-fill"></i>' : '<i></i>'
-        const highlightExpandEle = '<i class="scoicon sco-arrow-down expand"></i>'
+        const highlightCopyEle = GLOBAL_CONFIG.hightlight.copy ? '<i class="solitude st-copy-fill"></i>' : '<i></i>'
+        const highlightExpandEle = '<i class="solitude st-arrow-down expand"></i>'
 
         const hlTools = document.createElement('div')
         hlTools.className = `highlight-tools`
@@ -729,7 +699,7 @@ class hightlight {
         if (GLOBAL_CONFIG.hightlight.limit && itemHeight > GLOBAL_CONFIG.hightlight.limit) {
             $table.setAttribute('style', `height: ${GLOBAL_CONFIG.hightlight.limit}px`)
             ele.className = 'code-expand-btn'
-            ele.innerHTML = '<i class="scoicon sco-show-line"></i>'
+            ele.innerHTML = '<i class="solitude st-show-line"></i>'
             ele.addEventListener('click', (e) => {
                 $table.setAttribute('style', `height: ${itemHeight}px`)
                 e.target.classList.add('expand-done')
@@ -799,7 +769,6 @@ window.refreshFn = () => {
     sco.initAdjust()
     scrollFn()
     sidebarFn()
-    changeTimeFormat()
     initObserver()
     sco.addRuntime()
     sco.hideCookie()
@@ -809,6 +778,7 @@ window.refreshFn = () => {
     sco.categoriesBarActive()
     sco.listenToPageInputPress()
     sco.addNavBackgroundInit()
+    utils.changeTimeFormat()
     GLOBAL_CONFIG.rightside.enable && addRightMenuClickEvent()
     GLOBAL_CONFIG.lazyload.enable && utils.lazyloadImg()
     GLOBAL_CONFIG.lightbox && utils.lightbox(document.querySelectorAll("#article-container img:not(.flink-avatar)"))
@@ -822,7 +792,6 @@ window.refreshFn = () => {
     GLOBAL_CONFIG.comment.commentBarrage && PAGE_CONFIG.comment && initializeCommentBarrage()
     document.body.setAttribute('data-type', PAGE_CONFIG.page)
     PAGE_CONFIG.page === "music" && scoMusic.init()
-    GLOBAL_CONFIG.music.enable && !document.querySelector('#Music-page') && document.removeEventListener('keydown', scoMusic.setKeydown)
     GLOBAL_CONFIG.ai.enable && PAGE_CONFIG.page === "post" && ScoAI.init()
 }
 
