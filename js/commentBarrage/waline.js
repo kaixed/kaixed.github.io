@@ -3,7 +3,7 @@ function initializeCommentBarrage() {
     let config = {
         maxBarrage: 1,
         barrageTime: 8e3,
-        walineUrl: GLOBAL_CONFIG.comment.waline.url,
+        walineUrl: GLOBAL_CONFIG.comment.url,
         pageUrl: window.location.pathname,
     }
     new class {
@@ -78,9 +78,9 @@ function initializeCommentBarrage() {
             element.classList.add("comment-barrage-item");
             element.innerHTML = `
         <div class="barrageHead">
-            <a class="barrageTitle" href="javascript:sco.scrollTo('post-comment')">热评</a>
+            <a class="barrageTitle" href="javascript:sco.scrollTo('post-comment')">${GLOBAL_CONFIG.lang.barrage.title}</a>
             <div class="barrageNick">${comment.nick}</div>
-            <img class="barrageAvatar" src="https://cravatar.cn/avatar/${comment.avatar}"/>
+            <img class="barrageAvatar" src="${GLOBAL_CONFIG.comment.avatar}/avatar/${comment.avatar}"/>
             <a class="comment-barrage-close" href="javascript:sco.switchCommentBarrage();">
                 <i class="solitude st-close-fill"></i>
             </a>
@@ -108,11 +108,9 @@ function initializeCommentBarrage() {
 
             if (localStorage.getItem("commentBarrageSwitch") != null) {
                 commentBarrage.style.display = "flex";
-                GLOBAL_CONFIG.rightside.enable && (menuCommentBarrageText.textContent = "关闭热评");
                 consoleCommentBarrage.classList.add("on");
             } else {
                 commentBarrage.style.display = "none";
-                GLOBAL_CONFIG.rightside.enable && (menuCommentBarrageText.textContent = "显示热评");
                 consoleCommentBarrage.classList.remove("on");
             }
 

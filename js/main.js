@@ -74,7 +74,7 @@ const percent = () => {
 
     if ((document.getElementById("post-comment") || document.getElementById("footer")).offsetTop < viewportBottom || scrollPercent > 90) {
         document.querySelector("#nav-totop").classList.add("long")
-        percentElement.innerHTML = "返回顶部"
+        percentElement.innerHTML = GLOBAL_CONFIG.lang.backtop
     } else {
         document.querySelector("#nav-totop").classList.remove("long")
         if (scrollPercent >= 0) {
@@ -234,17 +234,29 @@ let sco = {
             }));
         }
     },
+    musicToggle: function () {
+        const $music = document.querySelector('#nav-music');
+        const $meting = document.querySelector('meting-js');
+        const $console = document.getElementById('consoleMusic');
+        const $toggleButton = document.getElementById('menu-music-toggle');
+        wleelw_musicPlaying = !wleelw_musicPlaying;
+        $music.classList.toggle("playing", wleelw_musicPlaying);
+        $console.classList.toggle("on", wleelw_musicPlaying);
+        if (wleelw_musicPlaying) {
+            $meting.aplayer.play();
+        } else {
+            $meting.aplayer.pause();
+        }
+    },
     switchCommentBarrage: function () {
         let commentBarrageElement = document.querySelector(".comment-barrage");
         if (commentBarrageElement) {
             if (window.getComputedStyle(commentBarrageElement).display === "flex") {
                 commentBarrageElement.style.display = "none";
-                document.querySelector(".menu-commentBarrage-text").textContent = "显示热评";
                 document.querySelector("#consoleCommentBarrage").classList.remove("on");
                 localStorage.removeItem("commentBarrageSwitch");
             } else {
                 commentBarrageElement.style.display = "flex";
-                document.querySelector(".menu-commentBarrage-text").textContent = "关闭热评";
                 document.querySelector("#consoleCommentBarrage").classList.add("on");
                 localStorage.setItem("commentBarrageSwitch", "false");
             }
@@ -290,12 +302,10 @@ let sco = {
             document.documentElement.setAttribute('data-theme', 'dark')
             saveToLocal.set('theme', 'dark', 0.02);
             utils.snackbarShow(GLOBAL_CONFIG.lang.theme.dark, false, 2000)
-            GLOBAL_CONFIG.rightside && (document.querySelector(".menu-darkmode-text").textContent = "浅色模式");
         } else {
             document.documentElement.setAttribute('data-theme', 'light')
             saveToLocal.set('theme', 'light', 0.02);
             utils.snackbarShow(GLOBAL_CONFIG.lang.theme.light, false, 2000)
-            GLOBAL_CONFIG.rightside && (document.querySelector(".menu-darkmode-text").textContent = "深色模式");
         }
     },
     hideTodayCard: () => document.getElementById('todayCard').classList.add('hide'),
@@ -336,10 +346,6 @@ let sco = {
                 el.setSelectionRange(-1, -1)
             }
         }
-        const commentTips = document.querySelector("#comment-tips");
-        if (commentTips) {
-            commentTips.classList.add("show");
-        }
     },
     initbbtalk: function () {
         if (document.querySelector('#bber-talk')) {
@@ -367,67 +373,6 @@ let sco = {
                 imageParent.insertBefore(captionElement, image.nextSibling);
             }
         });
-    },
-    downloadImage: function (imageUrl, filename = 'photo') {
-        if (rm.downloadimging) {
-            utils.snackbarShow("有正在进行中的下载，请稍后再试");
-            return;
-        }
-
-        rm.hideRightMenu();
-        rm.downloadimging = true;
-        utils.snackbarShow("正在下载中，请稍后", false, 10000);
-
-        let img = new Image();
-        img.setAttribute("crossOrigin", "anonymous");
-        img.onload = function () {
-            let canvas = document.createElement("canvas");
-            canvas.width = img.width;
-            canvas.height = img.height;
-            let ctx = canvas.getContext("2d");
-            ctx.drawImage(img, 0, 0, img.width, img.height);
-
-            let dataUrl = canvas.toDataURL("image/png");
-            let link = document.createElement("a");
-            link.download = filename;
-            link.href = dataUrl;
-
-            let clickEvent = new MouseEvent("click");
-            link.dispatchEvent(clickEvent);
-
-            utils.snackbarShow("图片已添加盲水印，请遵守版权协议");
-            rm.downloadimging = false;
-        };
-        img.src = imageUrl;
-    },
-    musicToggle: function () {
-        const $music = document.querySelector('#nav-music');
-        const $meting = document.querySelector('meting-js');
-        const $console = document.getElementById('consoleMusic');
-        const $toggleButton = document.getElementById('menu-music-toggle');
-        wleelw_musicPlaying = !wleelw_musicPlaying;
-        $music.classList.toggle("playing", wleelw_musicPlaying);
-        $console.classList.toggle("on", wleelw_musicPlaying);
-        if (wleelw_musicPlaying) {
-            $meting.aplayer.play();
-            $toggleButton.innerHTML = `<i class="solitude st-pause-fill"></i><span>暂停音乐</span>`;
-        } else {
-            $meting.aplayer.pause();
-            $toggleButton.innerHTML = `<i class="solitude st-play-fill"></i><span>播放音乐</span>`;
-        }
-        rm.hideRightMenu();
-    },
-    musicSkipBack: function () {
-        document.querySelector('meting-js').aplayer.skipBack()
-        rm.hideRightMenu()
-    },
-    musicSkipForward: function () {
-        document.querySelector('meting-js').aplayer.skipForward()
-        rm.hideRightMenu()
-    },
-    musicGetName: function () {
-        const titles = Array.from(document.querySelectorAll('.aplayer-title')).map(e => e.innerText);
-        return titles[0];
     },
     scrollToComment: function () {
         utils.scrollToDest(utils.getEleTop(document.getElementById('post-comment')), 300)
@@ -581,13 +526,13 @@ let sco = {
         });
     },
     addNavBackgroundInit: function () {
-        var scrollTop = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop || 0;
+        const scrollTop = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop || 0;
         if (scrollTop !== 0) {
-            var pageHeader = document.getElementById("page-header");
+            const pageHeader = document.getElementById("page-header");
             if (pageHeader) {
                 pageHeader.classList.add("nav-fixed", "nav-visible");
             }
-            var cookiesWindow = document.getElementById("cookies-window");
+            const cookiesWindow = document.getElementById("cookies-window");
             if (cookiesWindow) {
                 cookiesWindow.style.display = 'none';
             }
@@ -637,28 +582,59 @@ let sco = {
             document.getElementById("toPageButton").href = targetPageUrl;
         }
     },
-    addRandomCommentInfo: function () {
-        const e = `${GLOBAL_CONFIG.comment.randomInfoStart[Math.floor(Math.random() * GLOBAL_CONFIG.comment.randomInfoStart.length)]}${GLOBAL_CONFIG.comment.randomInfoEnd[Math.floor(Math.random() * GLOBAL_CONFIG.comment.randomInfoEnd.length)]}`;
+    owoBig() {
+        const owoSelectors = GLOBAL_CONFIG.comment.owo
 
-        const nameSelectors = ["#author", "input[name='comname']", "#inpName", "input[name='author']", "#ds-dialog-name", "#name", "input[name='nick']", "#comment_author"];
-        const emailSelectors = ["#mail", "#email", "input[name='commail']", "#inpEmail", "input[name='email']", "#ds-dialog-email", "input[name='mail']", "#comment_email"];
+        let owoBig = document.getElementById('owo-big');
+        if (!owoBig) {
+            owoBig = document.createElement('div');
+            owoBig.id = 'owo-big';
+            document.body.appendChild(owoBig);
+        }
 
-        const nameElements = nameSelectors.map(selector => document.querySelector(selector)).filter(Boolean);
-        const emailElements = emailSelectors.map(selector => document.querySelector(selector)).filter(Boolean);
+        const debounce = (func, wait) => {
+            let timeout;
+            return function (...args) {
+                const later = () => {
+                    clearTimeout(timeout);
+                    func(...args);
+                };
+                clearTimeout(timeout);
+                timeout = setTimeout(later, wait);
+            };
+        };
 
-        nameElements.forEach(element => {
-            element.value = e;
-            element.dispatchEvent(new Event("input"));
-        });
+        const showOwoBig = (event) => {
+            const target = event.target;
+            const owoItem = target.closest(owoSelectors.item);
+            if (owoItem && target.closest(owoSelectors.body)) {
+                const imgSrc = owoItem.querySelector('img')?.src;
+                if (imgSrc) {
+                    owoBig.innerHTML = `<img src="${imgSrc}" style="max-width: 100%; height: auto;">`;
+                    owoBig.style.display = 'block';
+                    positionOwoBig(owoItem);
+                }
+            }
+        };
 
-        emailElements.forEach(element => {
-            element.value = "donotreply@examp.com";
-            element.dispatchEvent(new Event("input"));
-        });
-    },
+        const hideOwoBig = (event) => {
+            if (event.target.closest(owoSelectors.item) && event.target.closest(owoSelectors.body)) {
+                owoBig.style.display = 'none';
+            }
+        };
+
+        function positionOwoBig(owoItem) {
+            const itemRect = owoItem.getBoundingClientRect();
+            owoBig.style.left = `${itemRect.left - (owoBig.offsetWidth / 4)}px`;
+            owoBig.style.top = `${itemRect.top}px`;
+        }
+
+        document.addEventListener('mouseover', debounce(showOwoBig, 100));
+        document.addEventListener('mouseout', hideOwoBig);
+    }
 }
 
-const AddHighLightTool = () => {
+const addHighlight = () => {
     const highlight = GLOBAL_CONFIG.highlight;
     if (!highlight) return;
 
@@ -759,6 +735,25 @@ const AddHighLightTool = () => {
     }
 }
 
+const addCopyright = () => {
+    if (!GLOBAL_CONFIG.copyright) return
+    const {limit, author, link, source, info} = GLOBAL_CONFIG.copyright
+    const handleCopy = (e) => {
+        e.preventDefault()
+        const copyText = window.getSelection(0).toString()
+        let text = copyText
+        if (copyText.length > limit) {
+            text = `${copyText}\n\n${author}\n${link}${window.location.href}\n${source}\n${info}`
+        }
+        if (e.clipboardData) {
+            return e.clipboardData.setData('text', text)
+        } else {
+            return window.clipboardData.setData('text', text)
+        }
+    }
+    document.body.addEventListener('copy', handleCopy)
+}
+
 class tabs {
     static init() {
         this.clickFnOfTabs()
@@ -810,21 +805,20 @@ window.refreshFn = () => {
     sco.listenToPageInputPress()
     sco.addNavBackgroundInit()
     utils.changeTimeFormat()
-    GLOBAL_CONFIG.rightside.enable && addRightMenuClickEvent()
     GLOBAL_CONFIG.lazyload.enable && utils.lazyloadImg()
     GLOBAL_CONFIG.lightbox && utils.lightbox(document.querySelectorAll("#article-container img:not(.flink-avatar)"))
-    GLOBAL_CONFIG.randomlinks && randomLinksList()
+    GLOBAL_CONFIG.randomlink && randomLinksList()
     PAGE_CONFIG.comment && initComment()
     PAGE_CONFIG.toc && toc.init();
-    (PAGE_CONFIG.is_post || PAGE_CONFIG.is_page) && ((AddHighLightTool()) || tabs.init())
+    (PAGE_CONFIG.is_post || PAGE_CONFIG.is_page) && ((addHighlight()) || tabs.init())
+    addCopyright()
     PAGE_CONFIG.is_home && showTodayCard()
     GLOBAL_CONFIG.covercolor.enable && coverColor()
     sco.initConsoleState()
     GLOBAL_CONFIG.comment.commentBarrage && PAGE_CONFIG.comment && initializeCommentBarrage()
     document.body.setAttribute('data-type', PAGE_CONFIG.page)
     PAGE_CONFIG.page === "music" && scoMusic.init()
-    GLOBAL_CONFIG.ai.enable && PAGE_CONFIG.page === "post" && ScoAI.init()
-    preloader.removePaceDone()
+    GLOBAL_CONFIG.post_ai && PAGE_CONFIG.page === "post" && efu_ai.init()
 }
 
 document.addEventListener('DOMContentLoaded', function () {
@@ -832,6 +826,8 @@ document.addEventListener('DOMContentLoaded', function () {
 })
 
 window.onkeydown = function (e) {
-    (123 === e.keyCode || (17 === e.ctrlKey && 16 === e.shiftKey && 67 === e.keyCode)) && utils.snackbarShow("开发者模式已打开，请遵循GPL协议", !1, 3e3);
+    (123 === e.keyCode || (17 === e.ctrlKey && 16 === e.shiftKey && 67 === e.keyCode)) && utils.snackbarShow(GLOBAL_CONFIG.lang.f12, !1, 3e3);
     (27 === e.keyCode) && sco.hideConsole();
 }
+
+document.addEventListener('copy', () => utils.snackbarShow(GLOBAL_CONFIG.lang.copy.success,false,3e3))

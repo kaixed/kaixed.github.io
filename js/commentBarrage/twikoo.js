@@ -3,9 +3,9 @@ function initializeCommentBarrage() {
     const e = {
         maxBarrage: 1,
         barrageTime: 8e3,
-        twikooUrl: GLOBAL_CONFIG.comment.twikoo.url,
+        twikooUrl: GLOBAL_CONFIG.comment.url,
         pageUrl: window.location.pathname,
-        accessToken: GLOBAL_CONFIG.comment.twikoo.accessToken,
+        accessToken: GLOBAL_CONFIG.comment.accessToken,
     };
 
     class CommentBarrage {
@@ -79,9 +79,9 @@ function initializeCommentBarrage() {
             commentBarrageItem.className = "comment-barrage-item";
             commentBarrageItem.innerHTML = `
                 <div class="barrageHead">
-                    <a class="barrageTitle" href="javascript:sco.scrollTo('post-comment')">热评</a>
+                    <a class="barrageTitle" href="javascript:sco.scrollTo('post-comment')">${GLOBAL_CONFIG.lang.barrage.title}</a>
                     <div class="barrageNick">${comment.nick}</div>
-                    <img class="barrageAvatar" src="https://cravatar.cn/avatar/${comment.mailMd5}"/>
+                    <img class="barrageAvatar" src="${GLOBAL_CONFIG.comment.avatar}/avatar/${comment.mailMd5}"/>
                     <a class="comment-barrage-close" href="javascript:sco.switchCommentBarrage();"><i class="solitude st-close-fill"></i></a>
                 </div>
                 <a class="barrageContent" href="javascript:sco.scrollTo('${comment.id}');">${commentContent}</a>
@@ -102,15 +102,9 @@ function initializeCommentBarrage() {
             const commentBarrageSwitch = localStorage.getItem("commentBarrageSwitch");
             if (commentBarrageSwitch != null) {
                 document.querySelector(".comment-barrage").style.display = "flex";
-                if (GLOBAL_CONFIG.rightside.enable) {
-                    document.querySelector(".menu-commentBarrage-text").textContent = "关闭热评";
-                }
                 document.querySelector("#consoleCommentBarrage").classList.add("on");
             } else {
                 document.querySelector(".comment-barrage").style.display = "none";
-                if (GLOBAL_CONFIG.rightside.enable) {
-                    document.querySelector(".menu-commentBarrage-text").textContent = "显示热评";
-                }
                 document.querySelector("#consoleCommentBarrage").classList.remove("on");
             }
             const comments = await this.fetchComments();
