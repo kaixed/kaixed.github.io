@@ -4476,11 +4476,11 @@ span.tags-punctuation::before {
     position: absolute;
     display: flex;
     z-index: 1;
-    content: "\e015";
-    font-family: huifont, serif;
+    content: "\e008";
+    font-family: solitude, serif;
     align-items: center;
     justify-content: center;
-    font-size: 26px;
+    font-size: 22px;
     line-height: 1;
     color: var(--efu-card-bg);
   }
