@@ -5830,6 +5830,9 @@ span.tags-punctuation {
 #home_top .recent-top-post-group .recent-post-top::-webkit-scrollbar {
   display: none;
 }
+#bannerGroup {
+  display: flex;
+}
 @media screen and (min-width: 1201px) {
   #bannerGroup {
     width: calc(50% - 0.25rem);
