@@ -2809,7 +2809,9 @@ span.tags-punctuation::before {
   color: var(--efu-white);
 }
 #aside-content .card-info img.avatar-img {
-  width: 118px;
+  width: 108px;
+  height: 108px;
+  object-fit: cover;
   right: 0;
   top: 0;
   border-radius: 500px;
@@ -10025,16 +10027,16 @@ figure.highlight table {
   scrollbar-color: var(--hlscrollbar-bg) transparent;
 }
 figure.highlight pre .deletion {
-  color: #bf42bf;
+  color: #f07178;
 }
 figure.highlight pre .addition {
-  color: #105ede;
+  color: #c3e88d;
 }
 figure.highlight pre .meta {
-  color: #c792ea;
+  color: #ff5370;
 }
 figure.highlight pre .comment {
-  color: #6272a4;
+  color: #546e7a;
 }
 figure.highlight pre .variable,
 figure.highlight pre .attribute,
@@ -10051,7 +10053,7 @@ figure.highlight pre .css .pseudo {
   color: #ff5370;
 }
 figure.highlight pre .tag {
-  color: #89ddff;
+  color: #82aaff;
 }
 figure.highlight pre .number,
 figure.highlight pre .preprocessor,
@@ -10059,10 +10061,10 @@ figure.highlight pre .literal,
 figure.highlight pre .params,
 figure.highlight pre .constant,
 figure.highlight pre .command {
-  color: #f78c6c;
+  color: #ffcb6b;
 }
 figure.highlight pre .built_in {
-  color: #ffcb6b;
+  color: #c3e88d;
 }
 figure.highlight pre .ruby .class .title,
 figure.highlight pre .css .rules .attribute,
@@ -10075,12 +10077,12 @@ figure.highlight pre .xml .cdata,
 figure.highlight pre .special,
 figure.highlight pre .number,
 figure.highlight pre .formula {
-  color: #c3e88d;
+  color: #89ddff;
 }
 figure.highlight pre .keyword,
 figure.highlight pre .title,
 figure.highlight pre .css .hexcolor {
-  color: #89ddff;
+  color: #82aaff;
 }
 figure.highlight pre .function,
 figure.highlight pre .python .decorator,
@@ -10090,11 +10092,11 @@ figure.highlight pre .ruby .title .keyword,
 figure.highlight pre .perl .sub,
 figure.highlight pre .javascript .title,
 figure.highlight pre .coffeescript .title {
-  color: #82aaff;
+  color: #c792ea;
 }
 figure.highlight pre .tag .attr,
 figure.highlight pre .javascript .function {
-  color: #c792ea;
+  color: #ff5370;
 }
 figure pre {
   margin: 0;
