@@ -6637,9 +6637,7 @@ span.tagsPageCount {
 }
 @media screen and (max-width: 768px) {
   #bbTimeList {
-    margin: 0;
-    background: var(--efu-background);
-    border: none;
+    display: none;
   }
 }
 i.bber-logo,
@@ -6860,9 +6858,7 @@ i.bber-gotobb {
 }
 @media screen and (max-width: 768px) {
   #bber .timeline ul li.item {
-    width: 100%;
-    margin-right: 0;
-    padding: 16px 20px;
+    display: none;
   }
 }
 #bber .timeline ul li.item hr {

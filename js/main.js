@@ -528,6 +528,20 @@ let sco = {
             }
         }
     },
+
+    topPostScroll: function() {
+        if (document.getElementById("recent-post-top")) {
+            let e = document.getElementById("recent-post-top");
+            e.addEventListener("mousewheel", (function(t) {
+                    e.scrollLeft += -t.wheelDelta / 2,
+                    document.body.clientWidth < 1200 && t.preventDefault()
+                }
+            ), {
+                passive: !1
+            })
+        }
+    },
+
     initAdjust: function (change = false) {
         const $blogName = document.getElementById('site-name')
         let blogNameWidth = $blogName && $blogName.offsetWidth
@@ -805,6 +819,7 @@ window.refreshFn = () => {
     }
     scrollFn()
     sidebarFn()
+    sco.topPostScroll()
     sco.hideCookie()
     sco.addPhotoFigcaption()
     sco.setTimeState()
