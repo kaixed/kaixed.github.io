@@ -6,7 +6,7 @@
   <link href="https://blog.kaixed.com/atom.xml" rel="self"/>
   
   <link href="https://blog.kaixed.com/"/>
-  <updated>2024-04-14T15:49:40.260Z</updated>
+  <updated>2024-04-14T16:05:17.945Z</updated>
   <id>https://blog.kaixed.com/</id>
   
   <author>
@@ -21,7 +21,7 @@
     <link href="https://blog.kaixed.com/p/2a6774eb.html"/>
     <id>https://blog.kaixed.com/p/2a6774eb.html</id>
     <published>2024-03-26T12:54:18.000Z</published>
-    <updated>2024-04-14T15:49:40.260Z</updated>
+    <updated>2024-04-14T16:05:17.945Z</updated>
     
     
     
@@ -40,9 +40,7 @@
     <link href="https://blog.kaixed.com/p/a91f8278.html"/>
     <id>https://blog.kaixed.com/p/a91f8278.html</id>
     <published>2024-03-22T06:42:46.000Z</published>
-    <updated>2024-04-14T15:49:40.260Z</updated>
-    
-    <content type="html"><![CDATA[<h3 id="使用Fragment实现Android底部导航栏"><a href="#使用Fragment实现Android底部导航栏" class="headerlink" title="使用Fragment实现Android底部导航栏"></a>使用Fragment实现Android底部导航栏</h3>]]></content>
+    <updated>2024-04-14T16:05:17.945Z</updated>
     
     
       
@@ -66,7 +64,7 @@
     <link href="https://blog.kaixed.com/p/364ea8cc.html"/>
     <id>https://blog.kaixed.com/p/364ea8cc.html</id>
     <published>2024-03-21T15:02:16.000Z</published>
-    <updated>2024-04-14T15:49:40.260Z</updated>
+    <updated>2024-04-14T16:05:17.945Z</updated>
     
     
     
@@ -85,9 +83,7 @@
     <link href="https://blog.kaixed.com/p/52b15f8e.html"/>
     <id>https://blog.kaixed.com/p/52b15f8e.html</id>
     <published>2024-01-05T10:39:45.000Z</published>
-    <updated>2024-04-14T15:49:40.260Z</updated>
-    
-    <content type="html"><![CDATA[<h3 id="1-二分查找"><a href="#1-二分查找" class="headerlink" title="1.二分查找"></a>1.二分查找</h3><p>二分查找分为普通二分查找和二分查找变体。<br>普通二分查找：在一个升序，无重复元素的数组中进行查找元素<br>二分查找变体：数组中元素重复</p><h4 id="1-1-普通二分查找"><a href="#1-1-普通二分查找" class="headerlink" title="1.1.普通二分查找"></a>1.1.普通二分查找</h4><details open><summary>普通二分查找</summary><div class="content"><ul><li>题目链接：<a href="https://leetcode.cn/problems/binary-search/description/">https://leetcode.cn/problems/binary-search/description/</a></li><li>题目难度: 简单</li></ul><div class="tabs" id="demo1"><ul class="nav-tabs"><li class="tab active"><button type="button" data-href="#demo1-1">思路分析</button></li><li class="tab"><button type="button" data-href="#demo1-2">实现代码</button></li><li class="tab"><button type="button" data-href="#demo1-3">总结归纳</button></li></ul><div class="tab-contents"><div class="tab-item-content active" id="demo1-1"><p>因为数组为升序，且数组中无重复元素，所以直接使用二分法模板进行解题</p><button type="button" class="tab-to-top" aria-label="scroll to top"><i class="solitude st-arrow-up-line"></i></button></div><div class="tab-item-content" id="demo1-2"><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Main</span> &#123;</span><br><span class="line">    <span class="comment">//左闭右开区间</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="type">int</span> <span class="title function_">findElem</span><span class="params">(<span class="type">int</span>[] data, <span class="type">int</span> elem)</span> &#123;</span><br><span class="line">        <span class="type">int</span> <span class="variable">left</span> <span class="operator">=</span> <span class="number">0</span>;</span><br><span class="line">        <span class="type">int</span> <span class="variable">right</span> <span class="operator">=</span> data.length;</span><br><span class="line">        <span class="keyword">while</span> (left &lt; right) &#123;</span><br><span class="line">            <span class="type">int</span> <span class="variable">middle</span> <span class="operator">=</span> left + ((right - left) &gt;&gt; <span class="number">1</span>);</span><br><span class="line">            <span class="keyword">if</span> (elem == data[middle]) &#123;</span><br><span class="line">                <span class="keyword">return</span> middle;</span><br><span class="line">            &#125; <span class="keyword">else</span> <span class="keyword">if</span> (elem &lt; data[middle]) &#123;</span><br><span class="line">                right = middle;</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                left = middle + <span class="number">1</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> -<span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//左闭右闭区间</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="type">int</span> <span class="title function_">findElem2</span><span class="params">(<span class="type">int</span>[] data, <span class="type">int</span> elem)</span> &#123;</span><br><span class="line">        <span class="type">int</span> <span class="variable">left</span> <span class="operator">=</span> <span class="number">0</span>;</span><br><span class="line">        <span class="type">int</span> <span class="variable">right</span> <span class="operator">=</span> data.length - <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">while</span> (left &lt;= right) &#123;</span><br><span class="line">            <span class="type">int</span> <span class="variable">middle</span> <span class="operator">=</span> left + ((right - left) &gt;&gt; <span class="number">1</span>);</span><br><span class="line">            <span class="keyword">if</span> (elem &lt; data[middle]) &#123;</span><br><span class="line">                right = middle - <span class="number">1</span>;</span><br><span class="line">            &#125; <span class="keyword">else</span> <span class="keyword">if</span> (elem &gt; data[middle]) &#123;</span><br><span class="line">                left = middle + <span class="number">1</span>;</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                <span class="keyword">return</span> middle;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> -<span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p>This is Tab 2.</p><button type="button" class="tab-to-top" aria-label="scroll to top"><i class="solitude st-arrow-up-line"></i></button></div><div class="tab-item-content" id="demo1-3"><p>二分法核心就是循环不变量。<br>应注意以下几点：</p><ol><li>区间是左闭右开还是左闭右闭</li><li>while循环条件是否正确，即当区间为左闭右开时，<code>left不能等于right</code>(右边界是开区间，取不到右边界，left!&#x3D;right)</li><li>middle的取值，即当区间是左闭右闭时，target如果在大区间的左区间，那么原本的<code>right = middle -1</code> (在判断时已经判断过target!&#x3D;arr[middle],所以target在[left,middle-1]这个区间中)</li></ol><button type="button" class="tab-to-top" aria-label="scroll to top"><i class="solitude st-arrow-up-line"></i></button></div></div></div><p class='p right'>—— 2024/4/11</p></div></details><h4 id="1-2-二分查找变体"><a href="#1-2-二分查找变体" class="headerlink" title="1.2.二分查找变体"></a>1.2.二分查找变体</h4>]]></content>
+    <updated>2024-04-14T16:05:17.945Z</updated>
     
     
       
