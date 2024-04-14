@@ -37,7 +37,6 @@ window.onload = () => {
 
     addEventTagList()
 
-
     const searchFnOnce = () => {
         $searchMask.addEventListener("click", closeSearch);
         utils.addEventListenerPjax(document.querySelector("#local-search .search-close-button"), "click", closeSearch);

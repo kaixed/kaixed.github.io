@@ -130,11 +130,11 @@ window.oncontextmenu = (ele) => {
     if (selectTextNow && window.getSelection()) {
         display = true;
         rm.menuItems.copy.style.display = 'block';
-        rm.menuItems.comment.style.display = 'block';
+        GLOBAL_CONFIG.comment && (rm.menuItems.comment.style.display = 'block');
         rm.menuItems.search.style.display = 'block';
     } else {
         rm.menuItems.copy.style.display = 'none';
-        rm.menuItems.comment.style.display = 'none';
+        GLOBAL_CONFIG.comment && (rm.menuItems.comment.style.display = 'none');
         rm.menuItems.search.style.display = 'none';
     }
 
@@ -219,8 +219,12 @@ window.oncontextmenu = (ele) => {
         rm.hideRightMenu()
     })
 
+    if(GLOBAL_CONFIG.comment.commentBarrage){
+        rm.barrage(!utils.saveToLocal.get('commentBarrageSwitch'))
+    }
+
     rm.menuItems.paste.addEventListener('click', () => rm.pasteText() && rm.hideRightMenu())
-    rm.menuItems.comment.addEventListener('click', () => rm.hideRightMenu() || sco.toTalk(selectTextNow))
+    GLOBAL_CONFIG.comment && rm.menuItems.comment.addEventListener('click', () => rm.hideRightMenu() || sco.toTalk(selectTextNow))
     rm.menuItems.new.addEventListener('click', () => window.open(rm.domhref) && rm.hideRightMenu())
     rm.menuItems.downloadImg.addEventListener('click', () => rm.downloadImage() && rm.hideRightMenu())
     rm.menuItems.copyImg.addEventListener('click', () => rm.copyImage() && rm.hideRightMenu())
