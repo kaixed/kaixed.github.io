@@ -2,6 +2,15 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://blog.kaixed.com/tlink/index.html</loc>
+    
+    <lastmod>2024-04-14</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>https://blog.kaixed.com/p/a91f8278.html</loc>
     
     <lastmod>2024-04-14</lastmod>
@@ -84,15 +93,6 @@
   
   <url>
     <loc>https://blog.kaixed.com/privacy/index.html</loc>
-    
-    <lastmod>2024-04-14</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://blog.kaixed.com/tlink/index.html</loc>
     
     <lastmod>2024-04-14</lastmod>
     
