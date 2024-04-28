@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="200" height="200" viewBox="0 0 200 200">
+  <defs>
+    <clipPath id="clip-SPRK_default_preset_name_custom_1">
+      <rect width="200" height="200"></rect>
+    </clipPath>
+  </defs>
+  <g id="SPRK_default_preset_name_custom_1" clip-path="url(#clip-SPRK_default_preset_name_custom_1)">
+    <rect width="200" height="200" fill="none"></rect>
+    <circle id="&#x692D;&#x5706;_1" cx="100" cy="100" r="100" fill="#315ef8"></circle>
+    <path id="&#x76F4;&#x7EBF;_1" d="M-.01,80a17.434,17.434,0,0,1-7.145-1.534,17.5,17.5,0,0,1-8.816-23.125l28-62.5a17.5,17.5,0,0,1,23.125-8.816A17.5,17.5,0,0,1,43.971,7.155l-28,62.5A17.5,17.5,0,0,1-.01,80Z" transform="translate(51 68.75)" fill="#fff" opacity="0.71"></path>
+    <path id="&#x76F4;&#x7EBF;_2" d="M-.01,80a17.434,17.434,0,0,1-7.145-1.534,17.5,17.5,0,0,1-8.816-23.125l28-62.5a17.5,17.5,0,0,1,23.125-8.816A17.5,17.5,0,0,1,43.971,7.155l-28,62.5A17.5,17.5,0,0,1-.01,80Z" transform="translate(121 68.75)" fill="#fff" opacity="0.8"></path>
+    <path id="&#x76F4;&#x7EBF;_3" d="M70,17.5H0A17.5,17.5,0,0,1-17.5,0,17.5,17.5,0,0,1,0-17.5H70A17.5,17.5,0,0,1,87.5,0,17.5,17.5,0,0,1,70,17.5Z" transform="translate(65 100.5)" fill="#fff" opacity="0.42"></path>
+  </g>
+</svg>
