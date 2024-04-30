@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="200" height="200" viewBox="0 0 200 200">
+  <defs>
+    <clipPath id="clip-path">
+      <rect id="&#x77E9;&#x5F62;_3" width="298.314" height="412.794" fill="#fff"></rect>
+    </clipPath>
+    <clipPath id="clip-path-2">
+      <path id="&#x8DEF;&#x5F84;_2" d="M97.314,122.544v211h63v-80h17v-56h-17v-75Zm91,211h63v-211h-63Z" fill="#fff"></path>
+    </clipPath>
+    <clipPath id="clip-SPRK_default_preset_name_custom_1">
+      <rect width="200" height="200"></rect>
+    </clipPath>
+  </defs>
+  <g id="SPRK_default_preset_name_custom_1" clip-path="url(#clip-SPRK_default_preset_name_custom_1)">
+    <rect id="&#x77E9;&#x5F62;_2" width="200" height="200" rx="45" fill="#315ef8"></rect>
+    <g id="&#x7EC4;_12" transform="translate(-99.314 -75)">
+      <g id="&#x7EC4;_8">
+        <g id="&#x7EC4;_7" clip-path="url(#clip-path-2)">
+          <path id="&#x8DEF;&#x5F84;_1" d="M143.314,75.544h110a45,45,0,0,1,45,45v110a45,45,0,0,1-45,45h-110a45,45,0,0,1-45-45v-110a45,45,0,0,1,45-45" fill="#fff"></path>
+        </g>
+      </g>
+    </g>
+  </g>
+</svg>
