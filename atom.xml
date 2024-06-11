@@ -6,7 +6,7 @@
   <link href="https://blog.kaixed.com/atom.xml" rel="self"/>
   
   <link href="https://blog.kaixed.com/"/>
-  <updated>2024-06-10T11:07:01.994Z</updated>
+  <updated>2024-06-11T10:24:59.193Z</updated>
   <id>https://blog.kaixed.com/</id>
   
   <author>
@@ -17,11 +17,35 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>Android开发随手记</title>
+    <link href="https://blog.kaixed.com/p/8dc3aff8.html"/>
+    <id>https://blog.kaixed.com/p/8dc3aff8.html</id>
+    <published>2024-06-11T09:00:16.000Z</published>
+    <updated>2024-06-11T10:24:59.193Z</updated>
+    
+    
+      
+      
+    <summary type="html">&lt;h2 id=&quot;1-在text中插入图片&quot;&gt;&lt;a href=&quot;#1-在text中插入图片&quot; class=&quot;headerlink&quot; title=&quot;1.在text中插入图片&quot;&gt;&lt;/a&gt;1.在text中插入图片&lt;/h2&gt;&lt;h4 id=&quot;1-1-实现步骤：&quot;&gt;&lt;a href=&quot;#1-1-</summary>
+      
+    
+    
+    
+    <category term="经验分享" scheme="https://blog.kaixed.com/categories/%E7%BB%8F%E9%AA%8C%E5%88%86%E4%BA%AB/"/>
+    
+    
+    <category term="教程" scheme="https://blog.kaixed.com/tags/%E6%95%99%E7%A8%8B/"/>
+    
+    <category term="安卓" scheme="https://blog.kaixed.com/tags/%E5%AE%89%E5%8D%93/"/>
+    
+  </entry>
+  
+  <entry>
     <title>小米便签维护记</title>
     <link href="https://blog.kaixed.com/p/2a6774eb.html"/>
     <id>https://blog.kaixed.com/p/2a6774eb.html</id>
     <published>2024-03-26T12:54:18.000Z</published>
-    <updated>2024-06-10T11:07:01.994Z</updated>
+    <updated>2024-06-11T10:24:59.193Z</updated>
     
     
     
@@ -40,7 +64,7 @@
     <link href="https://blog.kaixed.com/p/a91f8278.html"/>
     <id>https://blog.kaixed.com/p/a91f8278.html</id>
     <published>2024-03-22T06:42:46.000Z</published>
-    <updated>2024-06-10T11:07:01.994Z</updated>
+    <updated>2024-06-11T10:24:59.193Z</updated>
     
     
       
@@ -64,7 +88,7 @@
     <link href="https://blog.kaixed.com/p/364ea8cc.html"/>
     <id>https://blog.kaixed.com/p/364ea8cc.html</id>
     <published>2024-03-21T15:02:16.000Z</published>
-    <updated>2024-06-10T11:07:01.994Z</updated>
+    <updated>2024-06-11T10:24:59.193Z</updated>
     
     
     
@@ -83,7 +107,7 @@
     <link href="https://blog.kaixed.com/p/52b15f8e.html"/>
     <id>https://blog.kaixed.com/p/52b15f8e.html</id>
     <published>2024-01-05T10:39:45.000Z</published>
-    <updated>2024-06-10T11:07:01.994Z</updated>
+    <updated>2024-06-11T10:24:59.193Z</updated>
     
     
       
