@@ -2,11 +2,11 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
   <title>肤浅Leo</title>
   
-  <subtitle>分享生活中的小确幸</subtitle>
+  <subtitle>平安顺遂,喜乐无忧</subtitle>
   <link href="https://blog.kaixed.com/atom.xml" rel="self"/>
   
   <link href="https://blog.kaixed.com/"/>
-  <updated>2024-06-27T06:14:45.436Z</updated>
+  <updated>2024-06-27T14:48:10.807Z</updated>
   <id>https://blog.kaixed.com/</id>
   
   <author>
@@ -21,12 +21,15 @@
     <link href="https://blog.kaixed.com/p/720505d4.html"/>
     <id>https://blog.kaixed.com/p/720505d4.html</id>
     <published>2024-06-27T03:08:23.000Z</published>
-    <updated>2024-06-27T06:14:45.436Z</updated>
+    <updated>2024-06-27T14:48:10.807Z</updated>
     
     
       
       
-    <summary type="html">&lt;h2 id=&quot;问题一：打开未知文件时，会显示已经卸载的程序&quot;&gt;&lt;a href=&quot;#问题一：打开未知文件时，会显示已经卸载的程序&quot; class=&quot;headerlink&quot; title=&quot;问题一：打开未知文件时，会显示已经卸载的程序&quot;&gt;&lt;/a&gt;问题一：打开未知文件时，会显示已经卸载的</summary>
+    <summary type="html">&lt;h2 id=&quot;问题一：打开未知文件时，会显示已经卸载的程序&quot;&gt;&lt;a class=&quot;headerlink&quot; href=&quot;#问题一：打开未知文件时，会显示已经卸载的程序&quot;&gt;&lt;/a&gt;问题一：打开未知文件时，会显示已经卸载的程序&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;问题描述：&lt;br&gt;
+打开未知</summary>
       
     
     
@@ -43,12 +46,13 @@
     <link href="https://blog.kaixed.com/p/8dc3aff8.html"/>
     <id>https://blog.kaixed.com/p/8dc3aff8.html</id>
     <published>2024-06-11T09:00:16.000Z</published>
-    <updated>2024-06-27T06:14:45.436Z</updated>
+    <updated>2024-06-27T14:48:10.807Z</updated>
     
     
       
       
-    <summary type="html">&lt;h2 id=&quot;在text中插入图片&quot;&gt;&lt;a href=&quot;#在text中插入图片&quot; class=&quot;headerlink&quot; title=&quot;在text中插入图片&quot;&gt;&lt;/a&gt;在text中插入图片&lt;/h2&gt;&lt;h4 id=&quot;实现步骤：&quot;&gt;&lt;a href=&quot;#实现步骤：&quot; class=&quot;he</summary>
+    <summary type="html">&lt;h2 id=&quot;在text中插入图片&quot;&gt;&lt;a class=&quot;headerlink&quot; href=&quot;#在text中插入图片&quot;&gt;&lt;/a&gt;在text中插入图片&lt;/h2&gt;
+&lt;h4 id=&quot;实现步骤：&quot;&gt;&lt;a class=&quot;headerlink&quot; href=&quot;#实现步骤：&quot;&gt;&lt;/a&gt;实现步骤</summary>
       
     
     
@@ -67,12 +71,13 @@
     <link href="https://blog.kaixed.com/p/a91f8278.html"/>
     <id>https://blog.kaixed.com/p/a91f8278.html</id>
     <published>2024-03-22T06:42:46.000Z</published>
-    <updated>2024-06-27T06:14:45.436Z</updated>
+    <updated>2024-06-27T14:48:10.807Z</updated>
     
     
       
       
-    <summary type="html">&lt;h3 id=&quot;使用Fragment实现Android底部导航栏&quot;&gt;&lt;a href=&quot;#使用Fragment实现Android底部导航栏&quot; class=&quot;headerlink&quot; title=&quot;使用Fragment实现Android底部导航栏&quot;&gt;&lt;/a&gt;使用Fragment实现An</summary>
+    <summary type="html">&lt;h3 id=&quot;使用Fragment实现Android底部导航栏&quot;&gt;&lt;a class=&quot;headerlink&quot; href=&quot;#使用Fragment实现Android底部导航栏&quot;&gt;&lt;/a&gt;使用Fragment实现Android底部导航栏&lt;/h3&gt;
+</summary>
       
     
     
@@ -91,12 +96,15 @@
     <link href="https://blog.kaixed.com/p/52b15f8e.html"/>
     <id>https://blog.kaixed.com/p/52b15f8e.html</id>
     <published>2024-01-05T10:39:45.000Z</published>
-    <updated>2024-06-27T06:14:45.436Z</updated>
+    <updated>2024-06-27T14:48:10.807Z</updated>
     
     
       
       
-    <summary type="html">&lt;h3 id=&quot;1-二分查找&quot;&gt;&lt;a href=&quot;#1-二分查找&quot; class=&quot;headerlink&quot; title=&quot;1.二分查找&quot;&gt;&lt;/a&gt;1.二分查找&lt;/h3&gt;&lt;p&gt;二分查找分为普通二分查找和二分查找变体。&lt;br&gt;普通二分查找：在一个升序，无重复元素的数组中进行查找元素&lt;b</summary>
+    <summary type="html">&lt;h3 id=&quot;1-二分查找&quot;&gt;&lt;a class=&quot;headerlink&quot; href=&quot;#1-二分查找&quot;&gt;&lt;/a&gt;1.二分查找&lt;/h3&gt;
+&lt;p&gt;二分查找分为普通二分查找和二分查找变体。&lt;br&gt;
+普通二分查找：在一个升序，无重复元素的数组中进行查找元素&lt;br&gt;
+二分查找变体：数组中</summary>
       
     
     
